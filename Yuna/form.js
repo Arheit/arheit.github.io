@@ -604,13 +604,38 @@ const elements = {
     label: 'Exclusive Equipment #3',
     type: 'checkbox',
     value: () => document.getElementById('exclusive-equipment-3').checked,
-  },  
+  },
   moon_blessing: {
     ref: 'moon_blessing',
     id: 'moon-blessing',
     label: 'Night Time',
     type: 'checkbox',
     value: () => document.getElementById('moon-blessing').checked
+  },
+  pet: {
+    ref: 'pet',
+    id: 'pet',
+    label: 'Familier (30% ATM)',
+    type: 'checkbox',
+    value: () => document.getElementById('pet').checked,
+    icon: 'https://epic7x.com/wp-content/uploads/2018/12/stic_att_up.png'
+  },
+  sword_wish: {
+    ref: 'sword_wish',
+    id: 'sword-wish',
+    label: 'Voeu d\'épée (50% dmg boost)',
+    type: 'checkbox',
+    value: () => document.getElementById('sword-wish').checked
+  },
+  dice_roll: {
+    ref: 'dice_roll',
+    id: 'dice-roll',
+    label: 'Dice value',
+    type: 'slider',
+    min: 1,
+    max: 100,
+    default: 50,
+    value: () => Number(document.getElementById('dice-roll').value)
   }
 };
 

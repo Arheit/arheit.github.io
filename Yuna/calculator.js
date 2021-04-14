@@ -209,7 +209,7 @@ class Hero {
     let atkMod = 1;
     if (skill === undefined || skill.noBuff !== true) {
       //atkImprint = this.baseAtk * (Number(document.getElementById('atk-pc-imprint').value) / 100);
-      atkMod = 1 + getGlobalAtkMult() + (this.atkUp !== undefined ? this.atkUp() - 1 : 0) /*+ this.artifact.getAttackBoost()*/;
+      atkMod = 1 + getGlobalAtkMult() + (this.atkUp !== undefined ? this.atkUp(skill) - 1 : 0) /*+ this.artifact.getAttackBoost()*/;
     }
 
     return atk*atkMod;

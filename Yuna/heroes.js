@@ -110,5 +110,48 @@ const heroes = {
         dmgType: "physical"
       }
     }
+  },
+  adonai: {
+    name: 'Adonaï',
+    classType: classType.mage,
+    baseAtkp: 50,
+    baseAtkm: 150,
+    maxHp: 720,
+    defp: 86,
+    defm: 110,
+    form: [elements.sword_wish, elements.pet, elements.dice_roll],
+    atkUp: (skill) => {
+      if (!elements.pet.value())
+        return 1;
+      else
+        return (skill.dmgType && skill.dmgType === "magical") ? 1.3 : 1;
+    },
+    skills: {
+      auto: {
+        name: "Auto",
+        rate: 1,
+        pow: 1,
+        mult: () => elements.sword_wish.value() ? 1.5 : 1,
+        single: true,
+        dmgType: "magical"
+      },
+      glaciation: {
+        name: "Glaciation",
+        rate: () =>{
+          let dice = elements.dice_roll.value();
+
+          if (dice >= 62)
+            return 1.2;
+          else if (dice >= 25)
+            return 1.4;
+          else
+            return 1.6;
+        },
+        pow: 1,
+        mult: () => elements.sword_wish.value() ? 1.5 : 1,
+        single: true,
+        dmgType: "magical"
+      }
+    }
   }
 };
