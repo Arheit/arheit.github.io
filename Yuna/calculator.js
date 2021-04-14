@@ -120,16 +120,16 @@ const getGlobalAtkMult = () => {
 const getGlobalDamageMult = (hero) => {
   let mult = 0.0;
 
-  /*for (let checkboxId of ['rage-set']) {
-    const elem = document.getElementById(checkboxId);
-    mult += elem.checked ? Number(elem.value)-1 : 0.0;
-  }*/
+  // for (let checkboxId of ['rage-set']) {
+  //   const elem = document.getElementById(checkboxId);
+  //   mult += elem.checked ? Number(elem.value)-1 : 0.0;
+  // }
 
-  const defPresetSelector = document.getElementById('def-preset');
-  const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
-  if (hero.element === selected.dataset.elemExtraDmg) {
-      mult += parseFloat(selected.dataset.extraDmgPc)-1;
-  }
+  // const defPresetSelector = document.getElementById('def-preset');
+  // const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
+  // if (hero.element === selected.dataset.elemExtraDmg) {
+  //     mult += parseFloat(selected.dataset.extraDmgPc)-1;
+  // }
 
   return mult;
 };

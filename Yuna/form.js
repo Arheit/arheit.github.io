@@ -662,9 +662,9 @@ const resetPreset = (fieldId) => {
   if (fieldId === 'def') {
     $('#def-preset').selectpicker('val', '');
   }
-  if (fieldId === 'atkp' || fieldId === 'crit') {
-    $('#atk-preset').selectpicker('val', '');
-  }
+  // if (fieldId === 'atkp' || fieldId === 'crit') {
+  //   $('#atk-preset').selectpicker('val', '');
+  // }
 };
 
 const showHeroInfo = (hero) => {
@@ -847,11 +847,17 @@ const classIcon = (type) => {
 $(() => {
   try {
     const heroSelector = document.getElementById('hero');
+    const targetSelector = document.getElementById('def-preset');
     //const artiSelector = document.getElementById('artifact');
+
+    // <option value="blaze-dragona-13" data-def="1392" data-hp="20241" data-subtext="20241 hp/175 spd">Blaze Dragona</option>
+
     Object.keys(heroes).map((id => {
-      $(heroSelector).append(`<option value="${id}" data-tokens="${heroNicknames(id)}" data-content="${elemIcon(heroes[id].element)}${classIcon(heroes[id].classType)}<span>${heroName(id)}</span>">${heroName(id)}</option>`)
+      $(heroSelector).append(`<option value="${id}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
+      $(targetSelector).append(`<option value="${id}" data-def="100" data-hp="600" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
     }));
     $(heroSelector).selectpicker('refresh');
+    $(targetSelector).selectpicker('refresh');
 
     /*$(artiSelector).append(`<option value="">${artifactName('no_proc')}</option>`);
     $(artiSelector).append(`<option data-divider="true"></option>`);
@@ -859,7 +865,6 @@ $(() => {
       $(artiSelector).append(`<option value="${id}">${artifactName(id)}</option>`)
     }));*/
 
-    
     heroSelector.onchange = () => {
       const hero = heroes[heroSelector.value];
       //const artifact = { ...artifacts[artiSelector.value] };
@@ -868,15 +873,15 @@ $(() => {
       //refreshArtifactList(hero);
       //buildArtifact(artifact);
       resolve();
-      gtag('event', 'pick', {
-        event_category: 'Hero',
-        event_label: heroSelector.value,
-      });
+      // gtag('event', 'pick', {
+      //   event_category: 'Hero',
+      //   event_label: heroSelector.value,
+      // });
       refreshCompareBadge();
       document.getElementById('atkp').value = hero.baseAtk;
       update('atkp');
     };
-    
+
     const defPresetSelector = document.getElementById('def-preset');
     defPresetSelector.onchange = () => {
       const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
@@ -888,13 +893,13 @@ $(() => {
           hpInput.value = selected.dataset.hp;
           update(elements.target_max_hp.id)
         }
-        gtag('event', 'pick', {
-          event_category: 'Defense',
-          event_label: selected.value,
-        });
+        // gtag('event', 'pick', {
+        //   event_category: 'Defense',
+        //   event_label: selected.value,
+        // });
       }
     };
-    
+
     const dmgReducPresetSelector = document.getElementById('dmg-reduc-preset');
     dmgReducPresetSelector.onchange = () => {
       const selected = dmgReducPresetSelector.options[dmgReducPresetSelector.selectedIndex];
@@ -911,13 +916,13 @@ $(() => {
           document.getElementById('def-pc-up').value = selected.dataset.defup;
           update('def-pc-up');
         }
-        gtag('event', 'pick', {
-          event_category: 'Damage Reduction',
-          event_label: selected.value,
-        });
+        // gtag('event', 'pick', {
+        //   event_category: 'Damage Reduction',
+        //   event_label: selected.value,
+        // });
       }
     };
-    
+
     /*const atkPresetSelector = document.getElementById('atk-preset');
     atkPresetSelector.onchange = () => {
       const selected = atkPresetSelector.options[atkPresetSelector.selectedIndex];
@@ -928,7 +933,7 @@ $(() => {
         update('crit');
       }
     };*/
-    
+
     /*artiSelector.onchange = () => {
       buildArtifact(artifacts[artiSelector.value]);
       resolve();
@@ -962,10 +967,10 @@ $(() => {
     initTheme();
     darkSwitch.addEventListener('change', function(event) {
       applyTheme();
-      gtag('event', 'switch', {
-        event_category: 'Theme',
-        event_label: darkSwitch.checked ? 'dark' : 'light',
-      });
+      // gtag('event', 'switch', {
+      //   event_category: 'Theme',
+      //   event_label: darkSwitch.checked ? 'dark' : 'light',
+      // });
     });
     function initTheme() {
       const darkThemeSelected =
