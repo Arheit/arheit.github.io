@@ -30,11 +30,6 @@
             <a class="navbar-brand">Elyah Damage Calculator</a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item nav-link">
-                    <a class="nav-link p-0" target="_blank" href="https://www.buymeacoffee.com/maphe" data-toggle="tooltip" title="Buy me a Coffee" data-placement="left">
-                        <i class="fas fa-mug-hot fa-lg"></i>
-                    </a>
-                </li>
-                <li class="nav-item nav-link">
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="dark-switch">
                         <label class="custom-control-label" for="dark-switch">
@@ -45,13 +40,13 @@
                 </li>
             </ul>
         </nav>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>March 30, Update:</strong> Added Heroes: Kanna, Solitaria; Updated Heroes: Elphelt, Sol<br />
             Added Artifact: Air-to-Surface Missile: MISHA<br />
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>
+        </div>-->
         <div>
             <form id="stats">
                 <div id="hero-block">
@@ -60,11 +55,11 @@
                             <select id="hero" name="hero" class="form-control custom-select selectpicker" data-live-search="true" data-size="12">
                             </select>
                         </div>
-                        <div class="form-group col-md-4 col-sm-12">
+                        <!--<div class="form-group col-md-4 col-sm-12">
                             <select id="artifact" name="artifact" class="form-control custom-select selectpicker" data-live-search="true" data-size="12" data-none-selected-text="Artifact">
                             </select>
                         </div>
-                        <div class="form-group col-md-4 col-sm-12">
+                        <!--<div class="form-group col-md-4 col-sm-12">
                             <select id="atk-preset" name="atk-preset" class="form-control custom-select selectpicker" data-size="12" data-show-subtext="true">
                                 <option value="">Manual</option>
                                 <option data-divider="true"></option>
@@ -73,26 +68,49 @@
                                 <option value="crit" data-atk="2500" data-crit="350" data-subtext="(2500/350%)">All in Crit Dmg</option>
                                 <option value="elite" data-atk="5000" data-crit="300" data-subtext="(5000/300%)">Elite balanced</option>
                             </select>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div id="hero-info"></div>
 
-                    <div class="stat-block">
-                        <div class="form-group row col-sm-12">
-                            <label for="atk" class="col-md-9 col-form-label form-control-sm"><h5>Attack</h5></label>
-                            <div class="input-group input-group-sm col-md-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary" type="button" id="atk-minus" onclick="minus('atk')">&minus;</button>
+                    <div class="row">
+                        <div class="col-sm-6 half-left">
+                            <div class="stat-block">
+                                <div class="form-group row col-sm-12">
+                                    <label for="atkp" class="col-md-7 col-form-label form-control-sm"><h5>Physical Attack</h5></label>
+                                    <div class="input-group input-group-sm col-md-5">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="button" id="atkp-minus" onclick="minus('atkp')">&minus;</button>
+                                        </div>
+                                        <input type="number" class="form-control text-center" id="atkp" value="50" onkeyup="update('atkp')">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="atkp-plus" onclick="plus('atkp')">&plus;</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="number" class="form-control text-center" id="atk" value="2500" onkeyup="update('atk')">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="atk-plus" onclick="plus('atk')">&plus;</button>
+                                <div class="form-group row col-sm-12 mb-4">
+                                    <input type="range" class="custom-range" id="atkp-slide" min="40" max="1300" value="50" oninput="slide('atkp')" data-for="atkp">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row col-sm-12 mb-4">
-                            <input type="range" class="custom-range" id="atk-slide" min="200" max="10000" value="2500" oninput="slide('atk')" data-for="atk">
+                        <div class="col-sm-6 half-right">
+                            <div class="stat-block">
+                                <div class="form-group row col-sm-12">
+                                    <label for="atkm" class="col-md-7 col-form-label form-control-sm"><h5>Magical Attack</h5></label>
+                                    <div class="input-group input-group-sm col-md-5">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="button" id="atkm-minus" onclick="minus('atkm')">&minus;</button>
+                                        </div>
+                                        <input type="number" class="form-control text-center" id="atkm" value="50" onkeyup="update('atkm')">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="atkm-plus" onclick="plus('atkm')">&plus;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-sm-12 mb-4">
+                                    <input type="range" class="custom-range" id="atkm-slide" min="40" max="1300" value="50" oninput="slide('atkm')" data-for="atkm">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -100,29 +118,8 @@
                         <div class="col-sm-6 half-left">
                             <div class="stat-block">
                                 <div class="form-group row col-sm-12">
-                                    <label for="atk-pc-imprint" class="col-md-7 col-form-label form-control-sm">
-                                        <h5>Attack % Imprint <i class="far fa-question-circle fa-xs text-muted" data-toggle="tooltip" title="Enter sum of all allies' Attack Imprint Release (Imprint Concentration already included in your hero stats) ; calculation based on 6 star fully awaken hero stats"></i></h5>
-                                    </label>
-                                    <div class="input-group input-group-sm col-md-5">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary" type="button" id="atk-pc-imprint-minus" onclick="minus('atk-pc-imprint')">&minus;</button>
-                                        </div>
-                                        <input type="number" class="form-control text-center" id="atk-pc-imprint" value="0" onkeyup="update('atk-pc-imprint')">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" id="atk-pc-imprint-plus" onclick="plus('atk-pc-imprint')">&plus;</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row col-sm-12">
-                                    <input type="range" class="custom-range" id="atk-pc-imprint-slide" min="0" max="50" value="0" oninput="slide('atk-pc-imprint')">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 half-right">
-                            <div class="stat-block">
-                                <div class="form-group row col-sm-12">
                                     <label for="atk-pc-up" class="col-md-7 col-form-label form-control-sm">
-                                        <h5>Attack % Increase <i class="far fa-question-circle fa-xs text-muted" data-toggle="tooltip" title="Example: Rosa Hargana, Card of Small Miracles, Super Duper Water Gun Shooter"></i></h5>
+                                        <h5>Attack % Increase/Decrease <i class="far fa-question-circle fa-xs text-muted" data-toggle="tooltip" title="Example: Thunderdome"></i></h5>
                                     </label>
                                     <div class="input-group input-group-sm col-md-5">
                                         <div class="input-group-prepend">
@@ -135,35 +132,36 @@
                                     </div>
                                 </div>
                                 <div class="form-group row col-sm-12">
-                                    <input type="range" class="custom-range" id="atk-pc-up-slide" min="0" max="20" value="0" oninput="slide('atk-pc-up')">
+                                    <input type="range" class="custom-range" id="atk-pc-up-slide" min="-20" max="20" value="0" oninput="slide('atk-pc-up')">
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="stat-block">
-                        <div class="form-group row col-sm-12">
-                            <label for="crit" class="col-md-9 col-form-label form-control-sm"><h5>Critical Damage (%)</h5></label>
-                            <div class="input-group input-group-sm col-md-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary" type="button" id="crit-minus" onclick="minus('crit')">&minus;</button>
+                        <div class="col-sm-6 half-right">
+                            <div class="stat-block">
+                                <div class="form-group row col-sm-12">
+                                    <label for="crit" class="col-md-7 col-form-label form-control-sm"><h5>Critical Damage (%)</h5></label>
+                                    <div class="input-group input-group-sm col-md-5">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="button" id="crit-minus" onclick="minus('crit')">&minus;</button>
+                                        </div>
+                                        <input type="number" class="form-control text-center" id="crit" value="200" onkeyup="update('crit')">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="crit-plus" onclick="plus('crit')">&plus;</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="number" class="form-control text-center" id="crit" value="250" onkeyup="update('crit')">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="crit-plus" onclick="plus('crit')">&plus;</button>
+                                <div class="form-group row col-sm-12">
+                                    <input type="range" class="custom-range" id="crit-slide" min="200" max="300" value="200" oninput="slide('crit')">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row col-sm-12">
-                            <input type="range" class="custom-range" id="crit-slide" min="150" max="350" value="250" oninput="slide('crit')">
                         </div>
                     </div>
 
                     <div class="form-group col-sm-12">
-                        <div class="custom-control custom-checkbox custom-control-inline buff-block">
+                        <!--<div class="custom-control custom-checkbox custom-control-inline buff-block">
                             <input class="custom-control-input" type="checkbox" id="elem-adv" value="1.1" onchange="resolve()">
                             <label class="custom-control-label" for="elem-adv"><span id="elem-adv-icon"></span> Elemental Advantage</label>
-                        </div>
+                        </div>-->
 
                         <div class="custom-control custom-checkbox custom-control-inline buff-block">
                             <input class="custom-control-input" type="checkbox" id="atk-down" value="0.5" onchange="resolve()">
@@ -186,7 +184,7 @@
                             </label>
                         </div>
 
-                        <div class="custom-control custom-checkbox custom-control-inline buff-block">
+                        <!-- <div class="custom-control custom-checkbox custom-control-inline buff-block">
                             <input class="custom-control-input" type="checkbox" id="crit-dmg-up" value="0.5" onchange="resolve()">
                             <label class="custom-control-label" for="crit-dmg-up">
                                 <img src="https://epic7x.com/wp-content/uploads/2019/03/increase-critical-hit-damage.png" width="20" height="20" /> Increased Critical Hit Damage
@@ -205,12 +203,12 @@
                             <label class="custom-control-label" for="pen-set">
                                 <img src="https://www.e7leaks.com/datamine/penset.png" width="20" height="20" /> Penetration Set
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                     <hr />
                 </div>
 
-                <div id="artifact-block">
+                <!-- <div id="artifact-block">
                     <h4>Artifact</h4>
                     <div id="artifact-info"></div>
                     <div id="artifact-lvl-block" class="stat-block">
@@ -232,7 +230,7 @@
                     </div>
                     <div id="artifact-custom-block"></div>
                     <hr />
-                </div>
+                </div> -->
 
                 <div class="row">
                     <h4 class="col-md-4">Target</h4>
@@ -469,10 +467,10 @@
                 <span id="bomb-damage-block" class="badge badge-light float-right">
                     <img src="https://epic7x.com/wp-content/uploads/2019/07/bomb.png" width="20" height="20" /> <span id="bomb-damage"></span>
                 </span>
-                <span id="artifact-dmg-block" class="badge badge-light float-right">
+                <!-- <span id="artifact-dmg-block" class="badge badge-light float-right">
                     <i class="fas fa-cocktail"></i> <span id="artifact-dmg"></span>
                     <i class="far fa-question-circle fa-xs text-muted" data-toggle="tooltip" title="Damage coming from Artifact, already included in the table below"></i>
-                </span>
+                </span> -->
             </h4>
             <div>
                 <table class="table table-bordered table-sm col-sm-12">
@@ -599,7 +597,7 @@
         <script src="compare.js"></script>
         <script src="form.js"></script>
         <script src="heroes.js"></script>
-        <script src="artifacts.js"></script>
+        <!-- <script src="artifacts.js"></script> -->
         <script src="calculator.js"></script>
     </body>
 </html>

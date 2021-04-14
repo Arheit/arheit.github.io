@@ -662,7 +662,7 @@ const resetPreset = (fieldId) => {
   if (fieldId === 'def') {
     $('#def-preset').selectpicker('val', '');
   }
-  if (fieldId === 'atk' || fieldId === 'crit') {
+  if (fieldId === 'atkp' || fieldId === 'crit') {
     $('#atk-preset').selectpicker('val', '');
   }
 };
@@ -719,57 +719,57 @@ const build = (hero) => {
     }
   }
 
-  document.getElementById('elem-adv-icon').innerHTML = antiElemIcon(hero.element);
+  //document.getElementById('elem-adv-icon').innerHTML = antiElemIcon(hero.element);
 };
 
-const showArtifactInfo = (artifact) => {
-  const block = document.getElementById('artifact-info');
-  block.innerHTML = '';
+// const showArtifactInfo = (artifact) => {
+//   const block = document.getElementById('artifact-info');
+//   block.innerHTML = '';
 
-  if (artifact.info) {
-    block.innerHTML = `<div class="alert alert-info alert-dismissible fade show" role="alert">
-                      <b>${artifactName(artifact.id)}</b>: ${artifact.info}
-                   </div>`;
-  }
-};
+//   if (artifact.info) {
+//     block.innerHTML = `<div class="alert alert-info alert-dismissible fade show" role="alert">
+//                       <b>${artifactName(artifact.id)}</b>: ${artifact.info}
+//                    </div>`;
+//   }
+// };
 
-const buildArtifact = (artifact) => {
-  if (artifact) showArtifactInfo(artifact);
-  const specificBlock = document.getElementById('artifact-custom-block');
-  if (artifact && !artifact.form && !artifact.info) {
-    specificBlock.innerHTML = '';
-  }
+// const buildArtifact = (artifact) => {
+//   if (artifact) showArtifactInfo(artifact);
+//   const specificBlock = document.getElementById('artifact-custom-block');
+//   if (artifact && !artifact.form && !artifact.info) {
+//     specificBlock.innerHTML = '';
+//   }
 
-  if (!artifact || (!artifact.scale && !artifact.form && !artifact.info)) {
-    document.getElementById('artifact-block').style.display = 'none';
-    return;
-  }
-  document.getElementById('artifact-block').style.display = 'block';
-  document.getElementById('artifact-lvl-block').style.display = (artifact.scale !== undefined) ? 'block' : 'none';
+//   if (!artifact || (!artifact.scale && !artifact.form && !artifact.info)) {
+//     document.getElementById('artifact-block').style.display = 'none';
+//     return;
+//   }
+//   document.getElementById('artifact-block').style.display = 'block';
+//   document.getElementById('artifact-lvl-block').style.display = (artifact.scale !== undefined) ? 'block' : 'none';
 
-  if (artifact.form) {
-    specificBlock.innerHTML = '';
-    for (let elem of artifact.form) {
-      buildElement(elem, specificBlock);
-    }
-    specificBlock.style.display = 'block';
-  } else {
-    specificBlock.style.display = 'none';
-  }
-};
+//   if (artifact.form) {
+//     specificBlock.innerHTML = '';
+//     for (let elem of artifact.form) {
+//       buildElement(elem, specificBlock);
+//     }
+//     specificBlock.style.display = 'block';
+//   } else {
+//     specificBlock.style.display = 'none';
+//   }
+// };
 
-const refreshArtifactList = (hero) => {
-  const artiSelector = document.getElementById('artifact');
-  for (const artiOpt of artiSelector.querySelectorAll('option')) {
-    if (!artiOpt.value) continue;
-    artiOpt.disabled = artifacts[artiOpt.value].exclusive && (artifacts[artiOpt.value].exclusive !== hero.classType);
-  }
-  if (artiSelector.options[artiSelector.selectedIndex].disabled) {
-    artiSelector.value = '';
-  }
+// const refreshArtifactList = (hero) => {
+//   const artiSelector = document.getElementById('artifact');
+//   for (const artiOpt of artiSelector.querySelectorAll('option')) {
+//     if (!artiOpt.value) continue;
+//     artiOpt.disabled = artifacts[artiOpt.value].exclusive && (artifacts[artiOpt.value].exclusive !== hero.classType);
+//   }
+//   if (artiSelector.options[artiSelector.selectedIndex].disabled) {
+//     artiSelector.value = '';
+//   }
 
-  $('#artifact').selectpicker('refresh');
-};
+//   $('#artifact').selectpicker('refresh');
+// };
 
 const buildElement = (elem, parent) => {
   if (elem.type === 'slider') {
@@ -835,45 +835,48 @@ const classIcon = (type) => {
   }
 };
 
-const dedupeForm = (hero, artifact) => {
-  const heroElIds = (hero.form || []).map(element => element.id);
-  const artiElIds = (artifact.form || []).map(element => element.id);
-  const intersect = heroElIds.filter(id => artiElIds.includes(id));
-  if (intersect.length > 0) {
-    artifact.form = artifact.form.filter(element => !intersect.includes(element.id));
-  }
-}
+// const dedupeForm = (hero, artifact) => {
+//   const heroElIds = (hero.form || []).map(element => element.id);
+//   const artiElIds = (artifact.form || []).map(element => element.id);
+//   const intersect = heroElIds.filter(id => artiElIds.includes(id));
+//   if (intersect.length > 0) {
+//     artifact.form = artifact.form.filter(element => !intersect.includes(element.id));
+//   }
+// }
 
 $(() => {
   try {
     const heroSelector = document.getElementById('hero');
-    const artiSelector = document.getElementById('artifact');
+    //const artiSelector = document.getElementById('artifact');
     Object.keys(heroes).map((id => {
       $(heroSelector).append(`<option value="${id}" data-tokens="${heroNicknames(id)}" data-content="${elemIcon(heroes[id].element)}${classIcon(heroes[id].classType)}<span>${heroName(id)}</span>">${heroName(id)}</option>`)
     }));
     $(heroSelector).selectpicker('refresh');
 
-    $(artiSelector).append(`<option value="">${artifactName('no_proc')}</option>`);
+    /*$(artiSelector).append(`<option value="">${artifactName('no_proc')}</option>`);
     $(artiSelector).append(`<option data-divider="true"></option>`);
     Object.keys(artifacts).map((id => {
       $(artiSelector).append(`<option value="${id}">${artifactName(id)}</option>`)
-    }));
+    }));*/
 
+    
     heroSelector.onchange = () => {
       const hero = heroes[heroSelector.value];
-      const artifact = { ...artifacts[artiSelector.value] };
-      dedupeForm(hero, artifact);
+      //const artifact = { ...artifacts[artiSelector.value] };
+      //dedupeForm(hero, artifact);
       build(hero);
-      refreshArtifactList(hero);
-      buildArtifact(artifact);
+      //refreshArtifactList(hero);
+      //buildArtifact(artifact);
       resolve();
       gtag('event', 'pick', {
         event_category: 'Hero',
         event_label: heroSelector.value,
       });
       refreshCompareBadge();
+      document.getElementById('atkp').value = hero.baseAtk;
+      update('atkp');
     };
-
+    
     const defPresetSelector = document.getElementById('def-preset');
     defPresetSelector.onchange = () => {
       const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
@@ -891,7 +894,7 @@ $(() => {
         });
       }
     };
-
+    
     const dmgReducPresetSelector = document.getElementById('dmg-reduc-preset');
     dmgReducPresetSelector.onchange = () => {
       const selected = dmgReducPresetSelector.options[dmgReducPresetSelector.selectedIndex];
@@ -914,8 +917,8 @@ $(() => {
         });
       }
     };
-
-    const atkPresetSelector = document.getElementById('atk-preset');
+    
+    /*const atkPresetSelector = document.getElementById('atk-preset');
     atkPresetSelector.onchange = () => {
       const selected = atkPresetSelector.options[atkPresetSelector.selectedIndex];
       if (selected.value) {
@@ -924,21 +927,21 @@ $(() => {
         update('atk');
         update('crit');
       }
-    };
-
-    artiSelector.onchange = () => {
+    };*/
+    
+    /*artiSelector.onchange = () => {
       buildArtifact(artifacts[artiSelector.value]);
       resolve();
       gtag('event', 'pick', {
         event_category: 'Artifact',
         event_label: artiSelector.value,
       });
-    };
+    };*/
 
     const hero = heroes[heroSelector.value];
     build(hero);
-    refreshArtifactList(hero);
-    buildArtifact(artifacts[artiSelector.value]);
+    //refreshArtifactList(hero);
+    //buildArtifact(artifacts[artiSelector.value]);
     refreshCompareBadge();
   } catch (e) {}
 

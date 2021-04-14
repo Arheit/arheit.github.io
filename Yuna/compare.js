@@ -4,15 +4,15 @@ const getSavedBuilds = () => {
 }
 
 const setDefaultSettingName = () => {
-  const artifact = new Artifact(document.getElementById('artifact').value);
-  const hero = new Hero(document.getElementById('hero').value, artifact);
+  //const artifact = new Artifact(document.getElementById('artifact').value);
+  const hero = new Hero(document.getElementById('hero').value/*, artifact*/);
 
-  return `${Math.round(hero.atk)}⚔️x${Math.round(hero.crit)}% (${artifact.getName()}) vs ${Math.round(hero.target.def)}🛡️`;
+  return `${Math.round(hero.atkp)}⚔️x${Math.round(hero.crit)}% vs ${Math.round(hero.target.def)}🛡️`;
 };
 
 const addToComparePool = () => {
-  const artifact = new Artifact(document.getElementById('artifact').value);
-  const hero = new Hero(document.getElementById('hero').value, artifact);
+  //const artifact = new Artifact(document.getElementById('artifact').value);
+  const hero = new Hero(document.getElementById('hero').value/*, artifact*/);
 
   let dmg = {};
   for (const skillId of Object.keys(hero.skills)) {
@@ -71,7 +71,7 @@ const compare = (heroId) => {
     let html = `<td class="text-center align-middle"><a href="#" class="compare-clear-single" data-hero="${heroId}" data-build="${setName}"><i class="fas fa-trash-alt"></i></a></td><td class="py-2">${setName}</td>`;
     for (const skillId of Object.keys(heroSets[setName])) {
       const dmg = heroSets[setName][skillId];
-      const output = dmg['crit'] || dmg['normal'] || dmg['miss'] || 0;
+      const output = dmg['normal'] || dmg['miss'] || 0;
       html += `<td class="text-right py-2">${output}</td>`;
     }
     $(body).append(`<tr>${html}</tr>`)

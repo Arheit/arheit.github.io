@@ -117,14 +117,14 @@ const heroNicknames = (id) => {
   return i18n[lang].nicknames[id] || '';
 };
 
-const artifactName = (id) => {
-  const lang = document.getElementById('root').getAttribute('lang');
-  if (lang === 'en') {
-    return artifacts[id] ? artifacts[id].name : 'No Artifact Proc';
-  } else {
-    return i18n[lang].artifacts[id || 'no_proc'] || artifacts[id].name;
-  }
-};
+// const artifactName = (id) => {
+//   const lang = document.getElementById('root').getAttribute('lang');
+//   if (lang === 'en') {
+//     return artifacts[id] ? artifacts[id].name : 'No Artifact Proc';
+//   } else {
+//     return i18n[lang].artifacts[id || 'no_proc'] || artifacts[id].name;
+//   }
+// };
 
 const formLabel = (id) => {
   const lang = document.getElementById('root').getAttribute('lang');

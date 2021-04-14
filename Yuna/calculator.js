@@ -7,11 +7,11 @@ const hitTypes = {
 };
 
 const resolve = () => {
-  const artifact = new Artifact(document.getElementById('artifact').value);
-  const hero = new Hero(document.getElementById('hero').value, artifact);
+  //const artifact = new Artifact(document.getElementById('artifact').value);
+  const hero = new Hero(document.getElementById('hero').value, null);
 
   document.getElementById(`barrier-block`).style.display = 'none';
-  document.getElementById(`artifact-dmg-block`).style.display = 'none';
+  //document.getElementById(`artifact-dmg-block`).style.display = 'none';
   for (const dotType of [dot.bleed, dot.burn, dot.bomb]) {
     document.getElementById(`${dotType}-damage-block`).style.display = 'none';
   }
@@ -26,11 +26,11 @@ const resolve = () => {
     document.getElementById(`barrier`).innerText = Math.round(hero.getBarrierStrength()).toString();
   }
 
-  const artiDmg = hero.getAfterMathArtifactDamage();
-  if (artiDmg != null) {
-    document.getElementById(`artifact-dmg-block`).style.display = 'inline-block';
-    document.getElementById(`artifact-dmg`).innerText = Math.round(artiDmg).toString();
-  }
+  // const artiDmg = hero.getAfterMathArtifactDamage();
+  // if (artiDmg != null) {
+  //   document.getElementById(`artifact-dmg-block`).style.display = 'inline-block';
+  //   document.getElementById(`artifact-dmg`).innerText = Math.round(artiDmg).toString();
+  // }
 
   const table = document.getElementById('damage');
   table.innerHTML = '';
@@ -120,10 +120,10 @@ const getGlobalAtkMult = () => {
 const getGlobalDamageMult = (hero) => {
   let mult = 0.0;
 
-  for (let checkboxId of ['rage-set']) {
+  /*for (let checkboxId of ['rage-set']) {
     const elem = document.getElementById(checkboxId);
     mult += elem.checked ? Number(elem.value)-1 : 0.0;
-  }
+  }*/
 
   const defPresetSelector = document.getElementById('def-preset');
   const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
@@ -146,9 +146,9 @@ const getGlobalDefMult = () => {
 };
 
 class Hero {
-  constructor(id, artifact) {
+  constructor(id/*, artifact*/) {
     this.id = id;
-    this.atk = Number(document.getElementById('atk').value);
+    this.atkp = Number(document.getElementById('atkp').value);
     this.crit = Number(document.getElementById('crit').value);
     this.skills = heroes[id].skills;
     this.baseAtk = heroes[id].baseAtk || 0;
@@ -157,8 +157,8 @@ class Hero {
     this.element = heroes[id].element;
     this.barrier = heroes[id].barrier;
     this.barrierEnhance = heroes[id].barrierEnhance;
-    this.artifact = artifact;
-    this.target = new Target(artifact);
+    //this.artifact = artifact;
+    this.target = new Target(/*artifact*/);
   }
 
   getModifiers(skillId, soulburn = false) {
@@ -183,12 +183,12 @@ class Hero {
   }
 
   getDamage(skillId, soulburn = false) {
-    const critDmgUpBox = document.getElementById('crit-dmg-up');
-    const critDmgBuff = critDmgUpBox && critDmgUpBox.checked ? Number(critDmgUpBox.value) : 0.0;
+    //const critDmgUpBox = document.getElementById('crit-dmg-up');
+    //const critDmgBuff = critDmgUpBox && critDmgUpBox.checked ? Number(critDmgUpBox.value) : 0.0;
 
     const skill = this.skills[skillId];
     const hit = this.offensivePower(skillId, soulburn) * this.target.defensivePower(skill);
-    const critDmg = Math.min((this.crit / 100)+critDmgBuff, 3.5)+(skill.critDmgBoost ? skill.critDmgBoost(soulburn) : 0)+(this.artifact.getCritDmgBoost()||0);
+    const critDmg = Math.min((this.crit / 100)/*+critDmgBuff*/, 3.5)+(skill.critDmgBoost ? skill.critDmgBoost(soulburn) : 0)/*+(this.artifact.getCritDmgBoost()||0)*/;
     return {
       crit: skill.noCrit ? null : Math.round(hit*critDmg + this.getAfterMathDamage(skillId, hitTypes.crit)),
       crush: skill.noCrit || skill.onlyCrit ? null : Math.round(hit*1.3 + this.getAfterMathDamage(skillId, hitTypes.crush)),
@@ -200,16 +200,16 @@ class Hero {
   getAtk(skillId) {
     const skill = skillId !== undefined ? this.skills[skillId] : undefined;
 
-    const atk = (skill !== undefined && skill.atk !== undefined) ? skill.atk() : this.atk;
+    const atkp = (skill !== undefined && skill.atk !== undefined) ? skill.atk() : this.atkp;
 
-    let atkImprint = 0;
+    //let atkImprint = 0;
     let atkMod = 1;
     if (skill === undefined || skill.noBuff !== true) {
-      atkImprint = this.baseAtk * (Number(document.getElementById('atk-pc-imprint').value) / 100);
-      atkMod = 1 + getGlobalAtkMult() + (this.atkUp !== undefined ? this.atkUp() - 1 : 0) + this.artifact.getAttackBoost();
+      //atkImprint = this.baseAtk * (Number(document.getElementById('atk-pc-imprint').value) / 100);
+      atkMod = 1 + getGlobalAtkMult() + (this.atkUp !== undefined ? this.atkUp() - 1 : 0) /*+ this.artifact.getAttackBoost()*/;
     }
 
-    return (atk+atkImprint)*atkMod;
+    return atkp*atkMod;
   }
 
   offensivePower(skillId, soulburn) {
@@ -217,19 +217,19 @@ class Hero {
 
     const rate = (typeof skill.rate === 'function') ? skill.rate(soulburn) : skill.rate;
     const flatMod = skill.flat ? skill.flat(soulburn) : 0;
-    const flatMod2 = this.artifact.getFlatMult();
+    //const flatMod2 = this.artifact.getFlatMult();
 
     const pow = (typeof skill.pow === 'function') ? skill.pow(soulburn) : skill.pow;
     const skillEnhance = this.getSkillEnhanceMult(skillId);
     let elemAdv = 1.0;
-    if (document.getElementById('elem-adv').checked || (typeof skill.elemAdv === 'function') && skill.elemAdv() === true) {
+    /*if (document.getElementById('elem-adv').checked || (typeof skill.elemAdv === 'function') && skill.elemAdv() === true) {
       elemAdv = Number(document.getElementById('elem-adv').value);
-    }
+    }*/
     const target = document.getElementById('target').checked ? Number(document.getElementById('target').value) : 1.0;
 
-    let dmgMod = 1.0 + getGlobalDamageMult(this) + this.artifact.getDamageMultiplier(skill) + (skill.mult ? skill.mult(soulburn)-1 : 0);
+    let dmgMod = 1.0 + getGlobalDamageMult(this) /*+ this.artifact.getDamageMultiplier(skill)*/ + (skill.mult ? skill.mult(soulburn)-1 : 0);
 
-    return ((this.getAtk(skillId)*rate + flatMod)*dmgConst + flatMod2) * pow * skillEnhance * elemAdv * target * dmgMod;
+    return ((this.getAtk(skillId)*rate + flatMod)*dmgConst /*+ flatMod*/) * pow * skillEnhance /** elemAdv*/ * target * dmgMod;
   }
 
   getSkillEnhanceMult(skillId) {
@@ -262,13 +262,13 @@ class Hero {
     const skill = this.skills[skillId];
     const detonation = this.getDetonateDamage(skillId);
 
-    let artiDamage = this.getAfterMathArtifactDamage(skill);
-    if (artiDamage === null) artiDamage = 0;
+    // let artiDamage = this.getAfterMathArtifactDamage(skill);
+    // if (artiDamage === null) artiDamage = 0;
 
     const skillDamage = this.getAfterMathSkillDamage(skillId, hitType);
     const skillExtraDmg = skill.extraDmg !== undefined ? Math.round(skill.extraDmg(hitType)) : 0;
 
-    return detonation + artiDamage + skillDamage + skillExtraDmg;
+    return detonation /*+ artiDamage*/ + skillDamage + skillExtraDmg;
   }
 
   getAfterMathSkillDamage(skillId, hitType) {
@@ -283,14 +283,14 @@ class Hero {
     return skillDamage;
   }
 
-  getAfterMathArtifactDamage(skill) {
+  /*getAfterMathArtifactDamage(skill) {
     const artiMultipliers = this.artifact.getAfterMathMultipliers(skill);
     if (artiMultipliers !== null) {
       return this.getAtk()*artiMultipliers.atkPercent*dmgConst*this.target.defensivePower({ penetrate: () => artiMultipliers.penetrate }, true);
     }
 
     return null;
-  }
+  }*/
 
   getDetonateDamage(skillId) {
     const skill = this.skills[skillId];
@@ -321,20 +321,20 @@ class Hero {
 }
 
 class Target {
-  constructor(casterArtifact) {
+  constructor(/*casterArtifact*/) {
     const defMult = getGlobalDefMult() + Number(document.getElementById('def-pc-up').value)/100;
     this.def = Number(document.getElementById('def').value)*defMult;
-    this.casterArtifact = casterArtifact;
+    //this.casterArtifact = casterArtifact;
   }
 
   getPenetration(skill) {
     const base = skill && skill.penetrate ? skill.penetrate() : 0;
-    const artifact = this.casterArtifact.getDefensePenetration(skill);
-    const set = skill.single && document.getElementById('pen-set') && document.getElementById('pen-set').checked
+    //const artifact = this.casterArtifact.getDefensePenetration(skill);
+    /*const set = skill.single && document.getElementById('pen-set') && document.getElementById('pen-set').checked
         ? Number(document.getElementById('pen-set').value)
-        : 0;
+        : 0;*/
 
-    return Math.min(1, (1-base) * (1-set) * (1-artifact));
+    return Math.min(1, (1-base) /** (1-set) * (1-artifact)*/);
   }
 
   defensivePower(skill, noReduc = false) {
@@ -344,7 +344,7 @@ class Target {
   }
 }
 
-class Artifact {
+/*class Artifact {
   constructor(id) {
     this.id = id ? id : undefined;
   }
@@ -409,4 +409,4 @@ class Artifact {
     }
     return artifacts[this.id].flat(this.getValue());
   }
-}
+}*/
