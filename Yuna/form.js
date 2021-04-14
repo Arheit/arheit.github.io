@@ -604,7 +604,14 @@ const elements = {
     label: 'Exclusive Equipment #3',
     type: 'checkbox',
     value: () => document.getElementById('exclusive-equipment-3').checked,
-  },
+  },  
+  moon_blessing: {
+    ref: 'moon_blessing',
+    id: 'moon-blessing',
+    label: 'Night Time',
+    type: 'checkbox',
+    value: () => document.getElementById('moon-blessing').checked
+  }
 };
 
 elements.caster_speed.sub_elements = [elements.caster_speed_up];
@@ -651,9 +658,9 @@ const update = (fieldId) => {
 const plus = (fieldId) => {
   const input = document.getElementById(fieldId);
   const max = input.getAttribute('max');
-  const inc = Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1);
+  const inc = Math.round(Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1) * 10) / 10;
   if (max === null || Number(max) > input.value) {
-    input.value = Number(input.value)+inc;
+    input.value = Math.round((Number(input.value)+inc) * 10) / 10;
     update(fieldId);
     resetPreset(fieldId);
   }
@@ -667,9 +674,9 @@ const plus = (fieldId) => {
 const minus = (fieldId) => {
   const input = document.getElementById(fieldId);
   const min = input.getAttribute('min');
-  const inc = Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1);
+  const inc = Math.round(Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1) * 10) / 10;
   if (min === null || Number(min) < input.value) {
-    input.value = Number(input.value)-inc;
+    input.value = Math.round((Number(input.value)-inc) * 10) / 10;
     update(fieldId);
     resetPreset(fieldId);
   }

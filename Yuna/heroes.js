@@ -78,5 +78,37 @@ const heroes = {
         dmgType: "magical"
       }
     }
+  },
+  seithfeayr: {
+    name: 'Sèithfeayr',
+    classType: classType.thief,
+    baseAtkp: 132,
+    baseAtkm: 50,
+    maxHp: 567,
+    defp: 99,
+    defm: 100,
+    form: [elements.caster_stealth, elements.moon_blessing],
+    atkUp: () => {
+      if (!elements.moon_blessing.value())
+        return 0.9;
+      else
+        return 1.2;
+    },
+    skills: {
+      auto: {
+        name: "Auto",
+        rate: 1,
+        pow: 1,
+        single: true,
+        dmgType: "physical"
+      },
+      ambush: {
+        name: "Ambush",
+        rate: () => elements.caster_stealth.value() ? 2.2 : 1.9,
+        pow: 1,
+        single: true,
+        dmgType: "physical"
+      }
+    }
   }
 };
