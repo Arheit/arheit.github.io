@@ -232,7 +232,7 @@ class Hero {
 
     let dmgMod = 1.0 + getGlobalDamageMult(this) /*+ this.artifact.getDamageMultiplier(skill)*/ + (skill.mult ? skill.mult(soulburn)-1 : 0);
 
-    return ((this.getAtk(skillId)*rate + flatMod)*dmgConst /*+ flatMod*/) * pow /** skillEnhance*/ /** elemAdv*/ * target * dmgMod;
+    return ((this.getAtk(skillId) + flatMod) * rate * dmgConst /*+ flatMod*/) * pow /** skillEnhance*/ /** elemAdv*/ * target * dmgMod;
   }
 
   // getSkillEnhanceMult(skillId) {
