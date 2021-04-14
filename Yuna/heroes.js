@@ -34,15 +34,13 @@ const heroes = {
     skills: {
       s1: {
         name: "Physical attack",
-        //rate: () => elements.physical_rate.value(),
-        rate: 1,
+        rate: () => elements.physical_rate.value(),
         pow: 1,
         dmgType: "physical"
       },
       s2: {
         name: "Magical attack",
-        //rate: () => elements.magical_rate.value(),
-        rate: 1,
+        rate: () => elements.magical_rate.value(),
         pow: 1,
         dmgType: "magical"
       }

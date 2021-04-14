@@ -973,13 +973,15 @@ $(() => {
     const hero = heroes[heroSelector.value];
     document.getElementById('atkp').value = hero.baseAtkp;
     document.getElementById('atkm').value = hero.baseAtkm;
+    build(hero);
     update('atkp');
     update('atkm');
-    build(hero);
     // refreshArtifactList(hero);
     // buildArtifact(artifacts[artiSelector.value]);
     // refreshCompareBadge();
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
 
   resolve();
   $('[data-toggle="tooltip"]').tooltip();
