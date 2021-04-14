@@ -157,7 +157,7 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 121,
+    baseAtkp: 138,
     baseAtkm: 50,
     maxHp: 972,
     defp: 120,
