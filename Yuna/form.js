@@ -859,11 +859,11 @@ $(() => {
     $(heroSelector).selectpicker('refresh');
     $(targetSelector).selectpicker('refresh');
 
-    /*$(artiSelector).append(`<option value="">${artifactName('no_proc')}</option>`);
-    $(artiSelector).append(`<option data-divider="true"></option>`);
-    Object.keys(artifacts).map((id => {
-      $(artiSelector).append(`<option value="${id}">${artifactName(id)}</option>`)
-    }));*/
+    // $(artiSelector).append(`<option value="">${artifactName('no_proc')}</option>`);
+    // $(artiSelector).append(`<option data-divider="true"></option>`);
+    // Object.keys(artifacts).map((id => {
+    //   $(artiSelector).append(`<option value="${id}">${artifactName(id)}</option>`)
+    // }));
 
     heroSelector.onchange = () => {
       const hero = heroes[heroSelector.value];
@@ -877,7 +877,7 @@ $(() => {
       //   event_category: 'Hero',
       //   event_label: heroSelector.value,
       // });
-      refreshCompareBadge();
+      // refreshCompareBadge();
       document.getElementById('atkp').value = hero.baseAtk;
       update('atkp');
     };
@@ -923,31 +923,31 @@ $(() => {
       }
     };
 
-    /*const atkPresetSelector = document.getElementById('atk-preset');
-    atkPresetSelector.onchange = () => {
-      const selected = atkPresetSelector.options[atkPresetSelector.selectedIndex];
-      if (selected.value) {
-        document.getElementById('atk').value = selected.dataset.atk;
-        document.getElementById('crit').value = selected.dataset.crit;
-        update('atk');
-        update('crit');
-      }
-    };*/
+    // const atkPresetSelector = document.getElementById('atk-preset');
+    // atkPresetSelector.onchange = () => {
+    //   const selected = atkPresetSelector.options[atkPresetSelector.selectedIndex];
+    //   if (selected.value) {
+    //     document.getElementById('atk').value = selected.dataset.atk;
+    //     document.getElementById('crit').value = selected.dataset.crit;
+    //     update('atk');
+    //     update('crit');
+    //   }
+    // };
 
-    /*artiSelector.onchange = () => {
-      buildArtifact(artifacts[artiSelector.value]);
-      resolve();
-      gtag('event', 'pick', {
-        event_category: 'Artifact',
-        event_label: artiSelector.value,
-      });
-    };*/
+    // artiSelector.onchange = () => {
+    //   buildArtifact(artifacts[artiSelector.value]);
+    //   resolve();
+    //   gtag('event', 'pick', {
+    //     event_category: 'Artifact',
+    //     event_label: artiSelector.value,
+    //   });
+    // };
 
     const hero = heroes[heroSelector.value];
     build(hero);
-    //refreshArtifactList(hero);
-    //buildArtifact(artifacts[artiSelector.value]);
-    refreshCompareBadge();
+    // refreshArtifactList(hero);
+    // buildArtifact(artifacts[artiSelector.value]);
+    // refreshCompareBadge();
   } catch (e) {}
 
   resolve();

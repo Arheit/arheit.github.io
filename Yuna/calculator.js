@@ -1,17 +1,17 @@
 const dmgConst = 1.871;
 const hitTypes = {
   crit: 'crit',
-  crush: 'crush',
+  // crush: 'crush',
   normal: 'normal',
   miss: 'miss',
 };
 
 const resolve = () => {
-  //const artifact = new Artifact(document.getElementById('artifact').value);
+  // const artifact = new Artifact(document.getElementById('artifact').value);
   const hero = new Hero(document.getElementById('hero').value, null);
 
   document.getElementById(`barrier-block`).style.display = 'none';
-  //document.getElementById(`artifact-dmg-block`).style.display = 'none';
+  // document.getElementById(`artifact-dmg-block`).style.display = 'none';
   for (const dotType of [dot.bleed, dot.burn, dot.bomb]) {
     document.getElementById(`${dotType}-damage-block`).style.display = 'none';
   }
@@ -47,7 +47,6 @@ const resolve = () => {
               </a>
             </td>
             <td>${displayDmg(damage, 'crit')}</td>
-            <td>${displayDmg(damage, 'crush')}</td>
             <td>${displayDmg(damage, 'normal')}</td>
             <td>${displayDmg(damage, 'miss')}</td>
       </tr>`);
@@ -62,7 +61,6 @@ const resolve = () => {
               </a>
             </td>
             <td>${displayDmg(damage, 'crit')}</td>
-            <td>${displayDmg(damage, 'crush')}</td>
             <td>${displayDmg(damage, 'normal')}</td>
             <td>${displayDmg(damage, 'miss')}</td>
         </tr>`);
@@ -90,7 +88,7 @@ const getModTooltip = (hero, skillId, soulburn = false) => {
   if (values.pen != null) content += `${skillLabel('pen')}: <b class="float-right">${Math.round(values.pen*100)}%</b><br/>`;
   if (values.detonation != null) content += `${skillLabel('detonation')}: <b class="float-right">+${Math.round(values.detonation*100)}%</b><br/>`;
   if (values.exEq != null) content += `${skillLabel('exEq')}: <b class="float-right">+${Math.round(values.exEq*100)}%</b><br/>`;
-  if (values.elemAdv !== null) content += `${skillLabel('elemAdv')}: <i class="fas ${values.elemAdv ? 'fa-check-square' : 'fa-times-circle'} float-right"></i><br/>`;
+  // if (values.elemAdv !== null) content += `${skillLabel('elemAdv')}: <i class="fas ${values.elemAdv ? 'fa-check-square' : 'fa-times-circle'} float-right"></i><br/>`;
   if (values.afterMathFormula !== null) content += `${skillLabel('afterMathFormula')}/${skillLabel('att_rate')}: <b class="float-right">${Math.round(values.afterMathFormula.atkPercent*100)}%</b><br/>`;
   if (values.afterMathFormula !== null) content += `${skillLabel('afterMathFormula')}/${skillLabel('pen')}: <b class="float-right">${Math.round(values.afterMathFormula.penetrate*100)}%</b><br/>`;
   if (values.afterMathDmg !== null) content += `${skillLabel('afterMathDmg')}: <b class="float-right">${Math.round(values.afterMathDmg)}</b><br/>`;
@@ -106,13 +104,13 @@ const getGlobalAtkMult = () => {
     mult += elem.checked ? Number(elem.value)-1 : 0.0;
   }
 
-  if (elements.caster_vigor.value()) {
-    mult += 0.3;
-  }
+  // if (elements.caster_vigor.value()) {
+  //   mult += 0.3;
+  // }
 
-  if (elements.caster_enrage.value()) {
-    mult += 0.1;
-  }
+  // if (elements.caster_enrage.value()) {
+  //   mult += 0.1;
+  // }
 
   return mult + (Number(document.getElementById('atk-pc-up').value)/100);
 };
@@ -154,10 +152,10 @@ class Hero {
     this.baseAtk = heroes[id].baseAtk || 0;
     this.dot = heroes[id].dot;
     this.atkUp = heroes[id].atkUp;
-    this.element = heroes[id].element;
+    // this.element = heroes[id].element;
     this.barrier = heroes[id].barrier;
     this.barrierEnhance = heroes[id].barrierEnhance;
-    //this.artifact = artifact;
+    // this.artifact = artifact;
     this.target = new Target(/*artifact*/);
   }
 
@@ -174,7 +172,7 @@ class Hero {
       pen: skill.penetrate ? skill.penetrate() : null,
       detonation: skill.detonation !== undefined ? skill.detonation()-1 : null,
       exEq: skill.exEq !== undefined ? skill.exEq() : null,
-      elemAdv: (typeof skill.elemAdv === 'function') ? skill.elemAdv() : null,
+      // elemAdv: (typeof skill.elemAdv === 'function') ? skill.elemAdv() : null,
       afterMathFormula: skill.afterMath !== undefined ? skill.afterMath(soulburn) : null,
       afterMathDmg: skill.afterMath !== undefined ? this.getAfterMathSkillDamage(skillId, hitTypes.crit) : null,
       extraDmg: skill.extraDmg !== undefined ? skill.extraDmg() : null,
@@ -191,7 +189,7 @@ class Hero {
     const critDmg = Math.min((this.crit / 100)/*+critDmgBuff*/, 3.5)+(skill.critDmgBoost ? skill.critDmgBoost(soulburn) : 0)/*+(this.artifact.getCritDmgBoost()||0)*/;
     return {
       crit: skill.noCrit ? null : Math.round(hit*critDmg + this.getAfterMathDamage(skillId, hitTypes.crit)),
-      crush: skill.noCrit || skill.onlyCrit ? null : Math.round(hit*1.3 + this.getAfterMathDamage(skillId, hitTypes.crush)),
+      // crush: skill.noCrit || skill.onlyCrit ? null : Math.round(hit*1.3 + this.getAfterMathDamage(skillId, hitTypes.crush)),
       normal: skill.onlyCrit ? null : Math.round(hit + this.getAfterMathDamage(skillId, hitTypes.normal)),
       miss: skill.noMiss ? null : Math.round(hit*0.75 + this.getAfterMathDamage(skillId, hitTypes.miss))
     };
