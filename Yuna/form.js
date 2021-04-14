@@ -935,6 +935,11 @@ $(() => {
       // refreshCompareBadge();
       document.getElementById('atkp').value = hero.baseAtkp;
       document.getElementById('atkm').value = hero.baseAtkm;
+      const hpInput = document.getElementById(elements.caster_max_hp.id);
+      if (hpInput) {
+        hpInput.value = hero.maxHp;
+        update(elements.caster_max_hp.id)
+      }
       update('atkp');
       update('atkm');
     };
@@ -1008,6 +1013,11 @@ $(() => {
     build(hero);
     update('atkp');
     update('atkm');
+    const hpInput = document.getElementById(elements.caster_max_hp.id);
+    if (hpInput) {
+      hpInput.value = hero.maxHp;
+      update(elements.caster_max_hp.id)
+    }
     // refreshArtifactList(hero);
     // buildArtifact(artifacts[artiSelector.value]);
     // refreshCompareBadge();

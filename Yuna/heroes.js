@@ -184,5 +184,25 @@ const heroes = {
         dmgType: "physical"
       }
     }
+  },
+  niholn: {
+    name: 'Niholn',
+    classType: classType.soul_weaver,
+    baseAtkp: 50,
+    baseAtkm: 50,
+    maxHp: 1080,
+    defp: 80,
+    defm: 100,
+    form: [elements.caster_max_hp],
+    barrier: () => elements.caster_max_hp.value()*0.3,
+    skills: {
+      auto: {
+        name: "Auto",
+        rate: 1,
+        pow: 1,
+        single: true,
+        dmgType: "magical"
+      }
+    }
   }
 };
