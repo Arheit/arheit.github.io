@@ -220,43 +220,43 @@ class Hero {
     //const flatMod2 = this.artifact.getFlatMult();
 
     const pow = (typeof skill.pow === 'function') ? skill.pow(soulburn) : skill.pow;
-    const skillEnhance = this.getSkillEnhanceMult(skillId);
-    let elemAdv = 1.0;
-    /*if (document.getElementById('elem-adv').checked || (typeof skill.elemAdv === 'function') && skill.elemAdv() === true) {
-      elemAdv = Number(document.getElementById('elem-adv').value);
-    }*/
+    //const skillEnhance = this.getSkillEnhanceMult(skillId);
+    //let elemAdv = 1.0;
+    // if (document.getElementById('elem-adv').checked || (typeof skill.elemAdv === 'function') && skill.elemAdv() === true) {
+    //   elemAdv = Number(document.getElementById('elem-adv').value);
+    // }
     const target = document.getElementById('target').checked ? Number(document.getElementById('target').value) : 1.0;
 
     let dmgMod = 1.0 + getGlobalDamageMult(this) /*+ this.artifact.getDamageMultiplier(skill)*/ + (skill.mult ? skill.mult(soulburn)-1 : 0);
 
-    return ((this.getAtk(skillId)*rate + flatMod)*dmgConst /*+ flatMod*/) * pow * skillEnhance /** elemAdv*/ * target * dmgMod;
+    return ((this.getAtk(skillId)*rate + flatMod)*dmgConst /*+ flatMod*/) * pow /** skillEnhance*/ /** elemAdv*/ * target * dmgMod;
   }
 
-  getSkillEnhanceMult(skillId) {
-    const skill = this.skills[skillId];
-    let mult = 1.0;
+  // getSkillEnhanceMult(skillId) {
+  //   const skill = this.skills[skillId];
+  //   let mult = 1.0;
 
-    let enhancementSkillId = skillId;
-    let enhancement = skill.enhance;
+  //   let enhancementSkillId = skillId;
+  //   let enhancement = skill.enhance;
 
-    if (!enhancement && skill.enhance_from) {
-      enhancementSkillId = skill.enhance_from;
-      enhancement = this.skills[skill.enhance_from].enhance;
-    }
+  //   if (!enhancement && skill.enhance_from) {
+  //     enhancementSkillId = skill.enhance_from;
+  //     enhancement = this.skills[skill.enhance_from].enhance;
+  //   }
 
-    if (enhancement) {
-      const enhanceLevel = Number(document.getElementById(`molagora-${enhancementSkillId}`).value);
-      for (let i = 0; i < enhanceLevel; i++) {
-        mult += enhancement[i];
-      }
-    }
+  //   if (enhancement) {
+  //     const enhanceLevel = Number(document.getElementById(`molagora-${enhancementSkillId}`).value);
+  //     for (let i = 0; i < enhanceLevel; i++) {
+  //       mult += enhancement[i];
+  //     }
+  //   }
 
-    if (skill.exEq !== undefined) {
-      mult += skill.exEq();
-    }
+  //   if (skill.exEq !== undefined) {
+  //     mult += skill.exEq();
+  //   }
 
-    return mult;
-  }
+  //   return mult;
+  // }
 
   getAfterMathDamage(skillId, hitType) {
     const skill = this.skills[skillId];
@@ -316,7 +316,7 @@ class Hero {
   }
 
   getBarrierStrength() {
-    return this.barrier(this)*(this.barrierEnhance ? this.getSkillEnhanceMult(this.barrierEnhance) : 1);
+    return this.barrier(this)/**(this.barrierEnhance ? this.getSkillEnhanceMult(this.barrierEnhance) : 1)*/;
   }
 }
 
