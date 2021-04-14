@@ -153,5 +153,36 @@ const heroes = {
         dmgType: "magical"
       }
     }
+  },
+  zidkala: {
+    name: 'Zid\'Kala',
+    classType: classType.warrior,
+    baseAtkp: 121,
+    baseAtkm: 50,
+    maxHp: 972,
+    defp: 120,
+    defm: 80,
+    skills: {
+      auto: {
+        name: "Auto",
+        rate: 1,
+        pow: 1,
+        single: true,
+        dmgType: "physical"
+      },
+      vampire_blade: {
+        name: "Vampire Blade",
+        rate: 1.8,
+        pow: 1,
+        single: true,
+        dmgType: "physical"
+      },
+      blood_rend: {
+        name: "Blood Rend",
+        rate: 1.3,
+        pow: 1,
+        dmgType: "physical"
+      }
+    }
   }
 };
