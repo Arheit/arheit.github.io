@@ -1,4 +1,26 @@
 const elements = {
+  physical_rate: {
+    ref: 'physical_rate',
+    id: 'physical-rate',
+    label: 'Physical Multiplier',
+    type: 'slider',
+    min: 0,
+    max: 4,
+    step: 0.1,
+    default: 1,
+    value: () => Number(document.getElementById('physical-rate').value)
+  },
+  magical_rate: {
+    ref: 'magical_rate',
+    id: 'magical-rate',
+    label: 'Magical Multiplier',
+    type: 'slider',
+    min: 0,
+    max: 4,
+    step: 0.1,
+    default: 1,
+    value: () => Number(document.getElementById('magical-rate').value)
+  },
   nb_targets: {
     ref: 'nb_targets',
     id: 'nb-targets',
@@ -659,7 +681,7 @@ const minus = (fieldId) => {
 // };
 
 const resetPreset = (fieldId) => {
-  if (fieldId === 'def') {
+  if (fieldId === 'defp' || fieldId === 'defm') {
     $('#def-preset').selectpicker('val', '');
   }
   // if (fieldId === 'atkp' || fieldId === 'crit') {
@@ -854,7 +876,7 @@ $(() => {
 
     Object.keys(heroes).map((id => {
       $(heroSelector).append(`<option value="${id}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
-      $(targetSelector).append(`<option value="${id}" data-def="100" data-hp="600" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
+      $(targetSelector).append(`<option value="${id}" data-defp="${heroes[id].defp}" data-defm="${heroes[id].defm}" data-hp="${heroes[id].maxHp}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
     }));
     $(heroSelector).selectpicker('refresh');
     $(targetSelector).selectpicker('refresh');
@@ -878,16 +900,20 @@ $(() => {
       //   event_label: heroSelector.value,
       // });
       // refreshCompareBadge();
-      document.getElementById('atkp').value = hero.baseAtk;
+      document.getElementById('atkp').value = hero.baseAtkp;
+      document.getElementById('atkm').value = hero.baseAtkm;
       update('atkp');
+      update('atkm');
     };
 
     const defPresetSelector = document.getElementById('def-preset');
     defPresetSelector.onchange = () => {
       const selected = defPresetSelector.options[defPresetSelector.selectedIndex];
       if (selected.value) {
-        document.getElementById('def').value = selected.dataset.def;
-        update('def');
+        document.getElementById('defp').value = selected.dataset.defp;
+        update('defp');
+        document.getElementById('defm').value = selected.dataset.defm;
+        update('defm');
         const hpInput = document.getElementById(elements.target_max_hp.id);
         if (hpInput) {
           hpInput.value = selected.dataset.hp;
@@ -944,6 +970,10 @@ $(() => {
     // };
 
     const hero = heroes[heroSelector.value];
+    document.getElementById('atkp').value = hero.baseAtkp;
+    document.getElementById('atkm').value = hero.baseAtkm;
+    update('atkp');
+    update('atkm');
     build(hero);
     // refreshArtifactList(hero);
     // buildArtifact(artifacts[artiSelector.value]);

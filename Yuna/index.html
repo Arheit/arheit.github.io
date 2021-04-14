@@ -302,20 +302,11 @@
                             <option value="none" data-reduc="0" data-trans="0" data-defup="0">No Damage Reduction/Transfer</option>
                             <option data-divider="true"></option>
                             <optgroup label="Damage Reduction">
-                                <option value="proof-of-valor-init" data-reduc="30" data-subtext="30%">Proof of Valor (Battle start)</option>
-                                <option value="proof-of-valor-down" data-reduc="15" data-subtext="15%">Proof of Valor (After 5 hits)</option>
-                                <option value="adamant-shield" data-reduc="16" data-subtext="16%">Adamant Shield (Max)</option>
-                                <option value="elena" data-reduc="15" data-subtext="15%">Elena (S2 Passive)</option>
-                                <option value="c-armin" data-reduc="15" data-subtext="15%">Crimson Armin (S2 Passive)</option>
-                                <option value="sepulcrum-1" data-reduc="8" data-subtext="8%">Sepulcrum (Max - 1 stack)</option>
-                                <option value="sepulcrum-2" data-reduc="16" data-subtext="16%">Sepulcrum (Max - 2 stacks)</option>
-                                <option value="sepulcrum-3" data-reduc="24" data-subtext="24%">Sepulcrum (Max - 3 stacks)</option>
+                                <option value="adamant-shield" data-reduc="40" data-subtext="40%">Adamant Shield</option>
+                                <option value="security-state" data-reduc="20" data-subtext="20%">Security State</option>
                             </optgroup>
                             <optgroup label="Damage Transfer">
-                                <option value="ss-bellona" data-trans="30" data-subtext="30%">Seaside Bellona (S2 Passive)</option>
-                                <option value="aurius" data-trans="20" data-defup="10" data-subtext="20% (+10% Defense)">Aurius (Max)</option>
-                                <option value="t-crozet" data-trans="40" data-subtext="40%">Troublemaker Crozet (S2 Passive)</option>
-                                <option value="eaton" data-trans="30" data-subtext="30%">Eaton (S2 Passive)</option>
+                                <option value="aurius" data-trans="20" data-subtext="20%">Aurius</option>
                             </optgroup>
                         </select>
                     </div>
@@ -325,23 +316,45 @@
                         <div class="col-sm-6 half-left">
                             <div class="stat-block">
                                 <div class="form-group row col-sm-12">
-                                    <label for="def" class="col-md-7 col-form-label form-control-sm"><h5>Defense</h5></label>
+                                    <label for="defp" class="col-md-7 col-form-label form-control-sm"><h5>Physical Defense</h5></label>
                                     <div class="input-group input-group-sm col-md-5">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary" type="button" id="def-minus" onclick="minus('def')">&minus;</button>
+                                            <button class="btn btn-outline-secondary" type="button" id="defp-minus" onclick="minus('defp')">&minus;</button>
                                         </div>
-                                        <input type="number" class="form-control text-center" id="def" value="1000" onkeyup="update('def')">
+                                        <input type="number" class="form-control text-center" id="defp" value="1000" onkeyup="update('defp')">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" id="def-plus" onclick="plus('def')">&plus;</button>
+                                            <button class="btn btn-outline-secondary" type="button" id="defp-plus" onclick="plus('defp')">&plus;</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row col-sm-12">
-                                    <input type="range" class="custom-range" id="def-slide" min="200" max="5000" value="1000" oninput="slide('def')">
+                                    <input type="range" class="custom-range" id="defp-slide" min="200" max="5000" value="1000" oninput="slide('defp')">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 half-right">
+                            <div class="stat-block">
+                                <div class="form-group row col-sm-12">
+                                    <label for="defm" class="col-md-7 col-form-label form-control-sm"><h5>Magical Defense</h5></label>
+                                    <div class="input-group input-group-sm col-md-5">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="button" id="defm-minus" onclick="minus('defm')">&minus;</button>
+                                        </div>
+                                        <input type="number" class="form-control text-center" id="defm" value="1000" onkeyup="update('defm')">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="defm-plus" onclick="plus('defm')">&plus;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-sm-12">
+                                    <input type="range" class="custom-range" id="defm-slide" min="200" max="5000" value="1000" oninput="slide('defm')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 half-left">
                             <div class="stat-block">
                                 <div class="form-group row col-sm-12">
                                     <label for="def" class="col-md-7 col-form-label form-control-sm">
@@ -362,10 +375,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6 half-left">
+                        <div class="col-sm-6 half-right">
                             <div class="stat-block">
                                 <div class="form-group row col-sm-12">
                                     <label for="dmg-reduc" class="col-md-7 col-form-label form-control-sm"><h5>Damage Reduction (%)</h5></label>
@@ -384,7 +394,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 half-right">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 half-left">
                             <div class="stat-block">
                                 <div class="form-group row col-sm-12">
                                     <label for="dmg-trans" class="col-md-7 col-form-label form-control-sm"><h5>Damage Transfer (%)</h5></label>
@@ -403,18 +416,37 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 half-right">
+                            <div class="stat-block">
+                                <div class="form-group row col-sm-12">
+                                    <label for="dmg-bonus" class="col-md-7 col-form-label form-control-sm"><h5>Damage Bonus (%)</h5></label>
+                                    <div class="input-group input-group-sm col-md-5">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="button" id="dmg-bonus-minus" onclick="minus('dmg-bonus')">&minus;</button>
+                                        </div>
+                                        <input type="number" class="form-control text-center" id="dmg-bonus" value="0" onkeyup="update('dmg-bonus')">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" id="dmg-bonus-plus" onclick="plus('dmg-bonus')">&plus;</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-sm-12">
+                                    <input type="range" class="custom-range" id="dmg-bonus-slide" min="0" max="100" value="0" oninput="slide('dmg-bonus')">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group col-sm-12">
                         <div class="custom-control custom-checkbox custom-control-inline buff-block">
-                            <input class="custom-control-input" type="checkbox" id="def-up" value="0.6" onchange="resolve()">
+                            <input class="custom-control-input" type="checkbox" id="def-up" value="0.5" onchange="resolve()">
                             <label class="custom-control-label" for="def-up">
                                 <img src="https://epic7x.com/wp-content/uploads/2018/12/stic_def_up.png" width="20" height="20" /> Increased Defense
                             </label>
                         </div>
 
                         <div class="custom-control custom-checkbox custom-control-inline buff-block">
-                            <input class="custom-control-input" type="checkbox" id="def-down" value="-0.7" onchange="resolve()">
+                            <input class="custom-control-input" type="checkbox" id="def-down" value="-0.5" onchange="resolve()">
                             <label class="custom-control-label" for="def-down">
                                 <img src="https://epic7x.com/wp-content/uploads/2018/12/stic_def_dn.png" width="20" height="20" /> Decreased Defense
                             </label>

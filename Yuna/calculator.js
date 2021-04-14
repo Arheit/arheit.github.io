@@ -116,7 +116,7 @@ const getGlobalAtkMult = () => {
 };
 
 const getGlobalDamageMult = (hero) => {
-  let mult = 0.0;
+  const dmgBonus = Number(document.getElementById('dmg-bonus').value)/100;
 
   // for (let checkboxId of ['rage-set']) {
   //   const elem = document.getElementById(checkboxId);
@@ -129,7 +129,7 @@ const getGlobalDamageMult = (hero) => {
   //     mult += parseFloat(selected.dataset.extraDmgPc)-1;
   // }
 
-  return mult;
+  return dmgBonus;
 };
 
 const getGlobalDefMult = () => {
@@ -147,9 +147,11 @@ class Hero {
   constructor(id/*, artifact*/) {
     this.id = id;
     this.atkp = Number(document.getElementById('atkp').value);
+    this.atkm = Number(document.getElementById('atkm').value);
     this.crit = Number(document.getElementById('crit').value);
     this.skills = heroes[id].skills;
-    this.baseAtk = heroes[id].baseAtk || 0;
+    this.baseAtkp = heroes[id].baseAtkp || 0;
+    this.baseAtkm = heroes[id].baseAtkm || 0;
     this.dot = heroes[id].dot;
     this.atkUp = heroes[id].atkUp;
     // this.element = heroes[id].element;
@@ -199,6 +201,9 @@ class Hero {
     const skill = skillId !== undefined ? this.skills[skillId] : undefined;
 
     const atkp = (skill !== undefined && skill.atk !== undefined) ? skill.atk() : this.atkp;
+    const atkm = (skill !== undefined && skill.atk !== undefined) ? skill.atk() : this.atkm;
+
+    const atk = (skill !== undefined && skill.dmgType && skill.dmgType === "magical") ? atkm : atkp;
 
     //let atkImprint = 0;
     let atkMod = 1;
@@ -207,7 +212,7 @@ class Hero {
       atkMod = 1 + getGlobalAtkMult() + (this.atkUp !== undefined ? this.atkUp() - 1 : 0) /*+ this.artifact.getAttackBoost()*/;
     }
 
-    return atkp*atkMod;
+    return atk*atkMod;
   }
 
   offensivePower(skillId, soulburn) {
@@ -304,7 +309,7 @@ class Hero {
   getDotDamage(type) {
     switch (type) {
       case dot.bleed:
-        return this.getAtk()*0.3*dmgConst*this.target.defensivePower({ penetrate: () => 0.7 }, true);
+        return this.getAtk()*0.1*this.target.defensivePower({ penetrate: () => 1.0 }, true);
       case dot.burn:
         return this.getAtk()*0.6*dmgConst*this.target.defensivePower({ penetrate: () => 0.7 }, true);
       case dot.bomb:
@@ -321,7 +326,8 @@ class Hero {
 class Target {
   constructor(/*casterArtifact*/) {
     const defMult = getGlobalDefMult() + Number(document.getElementById('def-pc-up').value)/100;
-    this.def = Number(document.getElementById('def').value)*defMult;
+    this.defp = Number(document.getElementById('defp').value)*defMult;
+    this.defm = Number(document.getElementById('defm').value)*defMult;
     //this.casterArtifact = casterArtifact;
   }
 
@@ -338,7 +344,8 @@ class Target {
   defensivePower(skill, noReduc = false) {
     const dmgReduc = noReduc ? 0 : Number(document.getElementById('dmg-reduc').value)/100;
     const dmgTrans = skill.noTrans === true ? 0 : Number(document.getElementById('dmg-trans').value)/100;
-    return ((1-dmgReduc)*(1-dmgTrans))/(((this.def / 300)*this.getPenetration(skill)) + 1);
+    const def = skill.dmgType === "magical" ? this.defm : this.defp;
+    return ((1-dmgReduc)*(1-dmgTrans))/(((def / 300)*this.getPenetration(skill)) + 1);
   }
 }
 

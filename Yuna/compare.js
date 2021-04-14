@@ -7,7 +7,7 @@ const setDefaultSettingName = () => {
   //const artifact = new Artifact(document.getElementById('artifact').value);
   const hero = new Hero(document.getElementById('hero').value/*, artifact*/);
 
-  return `${Math.round(hero.atkp)}⚔️x${Math.round(hero.crit)}% vs ${Math.round(hero.target.def)}🛡️`;
+  return `${Math.round(hero.atkp)}⚔️x${Math.round(hero.crit)}% vs ${Math.round(hero.target.defp)}🛡️`;
 };
 
 const addToComparePool = () => {
