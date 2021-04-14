@@ -876,7 +876,8 @@ $(() => {
 
     Object.keys(heroes).map((id => {
       $(heroSelector).append(`<option value="${id}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
-      $(targetSelector).append(`<option value="${id}" data-defp="${heroes[id].defp}" data-defm="${heroes[id].defm}" data-hp="${heroes[id].maxHp}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
+      if (id != 'boss')
+        $(targetSelector).append(`<option value="${id}" data-defp="${heroes[id].defp}" data-defm="${heroes[id].defm}" data-hp="${heroes[id].maxHp}" data-tokens="${heroNicknames(id)}" data-content="${classIcon(heroes[id].classType)} <span>${heroName(id)}</span>">${heroName(id)}</option>`)
     }));
     $(heroSelector).selectpicker('refresh');
     $(targetSelector).selectpicker('refresh');
