@@ -82,11 +82,11 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 132,
+    baseAtkp: 144,
     baseAtkm: 50,
     maxHp: 567,
-    defp: 99,
-    defm: 100,
+    defp: 110,
+    defm: 110,
     form: [elements.caster_stealth, elements.moon_blessing],
     atkUp: () => {
       if (!elements.moon_blessing.value())
