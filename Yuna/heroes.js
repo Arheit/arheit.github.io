@@ -115,10 +115,10 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 150,
+    baseAtkm: 163,
     maxHp: 720,
-    defp: 86,
-    defm: 110,
+    defp: 96,
+    defm: 121,
     form: [elements.sword_wish, elements.pet, elements.dice_roll],
     atkUp: (skill) => {
       if (!elements.pet.value())
