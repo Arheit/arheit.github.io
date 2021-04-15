@@ -204,5 +204,30 @@ const heroes = {
         dmgType: "magical"
       }
     }
+  },
+  eophred: {
+    name: 'Eophred',
+    classType: classType.mage,
+    baseAtkp: 50,
+    baseAtkm: 130,
+    maxHp: 750,
+    defp: 96,
+    defm: 110,
+    skills: {
+      auto: {
+        name: "Auto",
+        rate: 1,
+        pow: 1,
+        single: true,
+        dmgType: "magical"
+      },
+      inflict_wounds: {
+        name: "Inflict Wounds",
+        rate: 1.6,
+        pow: 1,
+        single: true,
+        dmgType: "magical"
+      }
+    }
   }
 };
