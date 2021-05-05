@@ -82,7 +82,7 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 144,
+    baseAtkp: 156,
     baseAtkm: 50,
     maxHp: 567,
     defp: 110,
