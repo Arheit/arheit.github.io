@@ -49,11 +49,11 @@ const heroes = {
   ley: {
     name: 'Ley',
     classType: classType.ranger,
-    baseAtkp: 138,
-    baseAtkm: 99,
-    maxHp: 494,
-    defp: 110,
-    defm: 110,
+    baseAtkp: 150,
+    baseAtkm: 112,
+    maxHp: 516,
+    defp: 116,
+    defm: 116,
     dot: [dot.bleed],
     skills: {
       auto: {
