@@ -627,6 +627,16 @@ const elements = {
     type: 'checkbox',
     value: () => document.getElementById('sword-wish').checked
   },
+  venom_stack: {
+    ref: 'venom_stack',
+    id: 'venom-stack',
+    label: 'Venom stack',
+    type: 'memslider',
+    min: 0,
+    max: 10,
+    default: 0,
+    value: () => Number(document.getElementById('venom-stack').value)
+  },
   dice_roll: {
     ref: 'dice_roll',
     id: 'dice-roll',
@@ -636,6 +646,13 @@ const elements = {
     max: 100,
     default: 50,
     value: () => Number(document.getElementById('dice-roll').value)
+  },
+  elemental_overflow_casted: {
+    ref: 'elemental_overflow_casted',
+    id: 'elemental-overflow-casted',
+    label: 'Malus Déluge élémentaire',
+    type: 'checkbox',
+    value: () => document.getElementById('elemental-overflow-casted').checked
   }
 };
 

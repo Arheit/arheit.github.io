@@ -49,7 +49,7 @@ const heroes = {
   ley: {
     name: 'Ley',
     classType: classType.ranger,
-    baseAtkp: 150,
+    baseAtkp: 174,
     baseAtkm: 112,
     maxHp: 516,
     defp: 116,
@@ -82,7 +82,7 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 156,
+    baseAtkp: 224,
     baseAtkm: 50,
     maxHp: 567,
     defp: 110,
@@ -99,6 +99,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
+        mult: () => elements.caster_stealth.value() ? 1.2 : 1,
         single: true,
         dmgType: "physical"
       },
@@ -106,6 +107,7 @@ const heroes = {
         name: "Ambush",
         rate: () => elements.caster_stealth.value() ? 2.2 : 1.9,
         pow: 1,
+        mult: () => elements.caster_stealth.value() ? 1.2 : 1,
         single: true,
         dmgType: "physical"
       }
@@ -115,11 +117,11 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 175,
-    maxHp: 720,
-    defp: 96,
-    defm: 121,
-    form: [elements.sword_wish, elements.pet, elements.dice_roll],
+    baseAtkm: 240,
+    maxHp: 750,
+    defp: 100,
+    defm: 122,
+    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted],
     atkUp: (skill) => {
       if (!elements.pet.value())
         return 1;
@@ -131,13 +133,13 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1,
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
         single: true,
         dmgType: "magical"
       },
       glaciation: {
         name: "Glaciation",
-        rate: () =>{
+        rate: () => {
           let dice = elements.dice_roll.value();
 
           if (dice >= 62)
@@ -148,8 +150,24 @@ const heroes = {
             return 1.6;
         },
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1,
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
         single: true,
+        dmgType: "magical"
+      },
+      elemental_overflow_mono: {
+        name: "Déluge élémentaire (monocible)",
+        rate: 3,
+        pow: 1,
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      elemental_overflow_mult: {
+        name: "Déluge élémentaire (AoE)",
+        rate: 1.8,
+        pow: 1,
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        aoe: true,
         dmgType: "magical"
       }
     }
@@ -157,11 +175,11 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 149,
+    baseAtkp: 182,
     baseAtkm: 50,
-    maxHp: 972,
-    defp: 120,
-    defm: 80,
+    maxHp: 1008,
+    defp: 182,
+    defm: 110,
     skills: {
       auto: {
         name: "Auto",
@@ -209,10 +227,10 @@ const heroes = {
     name: 'Eophred',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 130,
-    maxHp: 750,
+    baseAtkm: 165,
+    maxHp: 780,
     defp: 96,
-    defm: 110,
+    defm: 130,
     skills: {
       auto: {
         name: "Auto",
