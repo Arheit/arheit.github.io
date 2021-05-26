@@ -50,10 +50,10 @@ const heroes = {
     name: 'Ley',
     classType: classType.ranger,
     baseAtkp: 174,
-    baseAtkm: 112,
+    baseAtkm: 120,
     maxHp: 516,
-    defp: 116,
-    defm: 116,
+    defp: 142,
+    defm: 137,
     dot: [dot.bleed],
     skills: {
       auto: {
@@ -85,8 +85,8 @@ const heroes = {
     baseAtkp: 224,
     baseAtkm: 50,
     maxHp: 567,
-    defp: 110,
-    defm: 110,
+    defp: 132,
+    defm: 130,
     form: [elements.caster_stealth, elements.moon_blessing],
     atkUp: () => {
       if (!elements.moon_blessing.value())
@@ -119,8 +119,8 @@ const heroes = {
     baseAtkp: 50,
     baseAtkm: 240,
     maxHp: 750,
-    defp: 100,
-    defm: 122,
+    defp: 122,
+    defm: 142,
     form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted],
     atkUp: (skill) => {
       if (!elements.pet.value())
@@ -229,8 +229,8 @@ const heroes = {
     baseAtkp: 50,
     baseAtkm: 165,
     maxHp: 780,
-    defp: 96,
-    defm: 130,
+    defp: 144,
+    defm: 182,
     skills: {
       auto: {
         name: "Auto",
