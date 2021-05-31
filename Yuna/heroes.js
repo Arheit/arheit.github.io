@@ -50,10 +50,10 @@ const heroes = {
     name: 'Ley',
     classType: classType.ranger,
     baseAtkp: 174,
-    baseAtkm: 120,
-    maxHp: 516,
+    baseAtkm: 145,
+    maxHp: 564,
     defp: 142,
-    defm: 137,
+    defm: 142,
     dot: [dot.bleed],
     skills: {
       auto: {
@@ -65,14 +65,14 @@ const heroes = {
       },
       ardent_strike: {
         name: "Ardent Strike",
-        rate: 1.4,
+        rate: 1.5,
         pow: 1,
         single: true,
         dmgType: "magical"
       },
       ardent_strike_explosion: {
         name: "Ardent Strike Explosion",
-        rate: 0.14,
+        rate: 0.75,
         pow: 1,
         noMiss: true,
         dmgType: "magical"
@@ -82,7 +82,7 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 224,
+    baseAtkp: 280,
     baseAtkm: 50,
     maxHp: 567,
     defp: 132,
@@ -118,9 +118,9 @@ const heroes = {
     classType: classType.mage,
     baseAtkp: 50,
     baseAtkm: 240,
-    maxHp: 750,
-    defp: 122,
-    defm: 142,
+    maxHp: 780,
+    defp: 144,
+    defm: 170,
     form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted],
     atkUp: (skill) => {
       if (!elements.pet.value())
@@ -143,11 +143,11 @@ const heroes = {
           let dice = elements.dice_roll.value();
 
           if (dice >= 62)
-            return 1.2;
-          else if (dice >= 25)
             return 1.4;
-          else
+          else if (dice >= 25)
             return 1.6;
+          else
+            return 1.8;
         },
         pow: 1,
         mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
@@ -178,8 +178,8 @@ const heroes = {
     baseAtkp: 182,
     baseAtkm: 50,
     maxHp: 1008,
-    defp: 182,
-    defm: 110,
+    defp: 195,
+    defm: 154,
     skills: {
       auto: {
         name: "Auto",
@@ -195,9 +195,15 @@ const heroes = {
         single: true,
         dmgType: "physical"
       },
-      blood_rend: {
-        name: "Blood Rend",
+      blood_rend_multi: {
+        name: "Blood Rend (multicible)",
         rate: 1.3,
+        pow: 1,
+        dmgType: "physical"
+      },
+      blood_rend_mono: {
+        name: "Blood Rend (monocible)",
+        rate: 1.6,
         pow: 1,
         dmgType: "physical"
       }
@@ -227,9 +233,9 @@ const heroes = {
     name: 'Eophred',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 165,
+    baseAtkm: 225,
     maxHp: 780,
-    defp: 144,
+    defp: 156,
     defm: 182,
     skills: {
       auto: {
