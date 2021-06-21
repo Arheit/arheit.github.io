@@ -99,7 +99,7 @@ const getModTooltip = (hero, skillId, soulburn = false) => {
 const getGlobalAtkMult = () => {
   let mult = 0.0;
 
-  for (let checkboxId of ['atk-down', 'atk-up', 'atk-up-great']) {
+  for (let checkboxId of ['atk-down', 'atk-up', 'atk-up-great', 'sacred-fire']) {
     const elem = document.getElementById(checkboxId);
     mult += elem.checked ? Number(elem.value)-1 : 0.0;
   }
@@ -333,16 +333,19 @@ class Target {
 
   getPenetration(skill) {
     const base = skill && skill.penetrate ? skill.penetrate() : 0;
+    const glbl = document.getElementById('def-pen').value / 100.0;
     //const artifact = this.casterArtifact.getDefensePenetration(skill);
     /*const set = skill.single && document.getElementById('pen-set') && document.getElementById('pen-set').checked
         ? Number(document.getElementById('pen-set').value)
         : 0;*/
 
-    return Math.min(1, (1-base) /** (1-set) * (1-artifact)*/);
+    return Math.min(1, (1-base) * (1-glbl) /** (1-set) * (1-artifact)*/);
   }
 
   defensivePower(skill, noReduc = false) {
-    const dmgReduc = noReduc ? 0 : Number(document.getElementById('dmg-reduc').value)/100;
+    let dmgReduc = noReduc ? 0 : (Number(document.getElementById('dmg-reduc').value)/100);
+    if (noReduc !== true && document.getElementById('sacred-fire-def').checked)
+        dmgReduc += Number(document.getElementById('sacred-fire-def').value);
     const dmgTrans = skill.noTrans === true ? 0 : Number(document.getElementById('dmg-trans').value)/100;
     const def = skill.dmgType === "magical" ? this.defm : this.defp;
     return ((1-dmgReduc)*(1-dmgTrans))/(((def / 300)*this.getPenetration(skill)) + 1);

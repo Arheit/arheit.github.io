@@ -49,19 +49,20 @@ const heroes = {
   ley: {
     name: 'Ley',
     classType: classType.ranger,
-    baseAtkp: 174,
-    baseAtkm: 145,
+    baseAtkp: 78,
+    baseAtkm: 429,
     maxHp: 564,
     defp: 142,
     defm: 142,
-    dot: [dot.bleed],
+    form: [elements.caster_attacked_last_turn],
     skills: {
       auto: {
         name: "Auto",
         rate: 1,
         pow: 1,
+        mult: () => elements.caster_attacked_last_turn.value() ? 1 : 1.25,
         single: true,
-        dmgType: "physical"
+        dmgType: "magical"
       },
       ardent_strike: {
         name: "Ardent Strike",
@@ -82,7 +83,7 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 280,
+    baseAtkp: 360,
     baseAtkm: 50,
     maxHp: 567,
     defp: 132,
@@ -117,10 +118,10 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 240,
-    maxHp: 780,
-    defp: 144,
-    defm: 170,
+    baseAtkm: 272,
+    maxHp: 840,
+    defp: 161,
+    defm: 190,
     form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted],
     atkUp: (skill) => {
       if (!elements.pet.value())
@@ -137,17 +138,15 @@ const heroes = {
         single: true,
         dmgType: "magical"
       },
-      glaciation: {
-        name: "Glaciation",
+      embrasement: {
+        name: "Embrasement d'épée",
         rate: () => {
           let dice = elements.dice_roll.value();
 
-          if (dice >= 62)
-            return 1.4;
-          else if (dice >= 25)
-            return 1.6;
+          if (dice > 60)
+            return 2.0;
           else
-            return 1.8;
+            return 2.2;
         },
         pow: 1,
         mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
@@ -175,10 +174,10 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 182,
+    baseAtkp: 241,
     baseAtkm: 50,
-    maxHp: 1008,
-    defp: 195,
+    maxHp: 1080,
+    defp: 221,
     defm: 154,
     skills: {
       auto: {
@@ -233,10 +232,10 @@ const heroes = {
     name: 'Eophred',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 225,
-    maxHp: 780,
-    defp: 156,
-    defm: 182,
+    baseAtkm: 256,
+    maxHp: 840,
+    defp: 144,
+    defm: 210,
     skills: {
       auto: {
         name: "Auto",

@@ -647,6 +647,13 @@ const elements = {
     default: 50,
     value: () => Number(document.getElementById('dice-roll').value)
   },
+  caster_attacked_last_turn: {
+    ref: 'caster_attacked_last_turn',
+    id: 'caster-attacked-last-turn',
+    label: 'Caster was attacked last turn',
+    type: 'checkbox',
+    value: () => document.getElementById('caster-attacked-last-turn').checked
+  },
   elemental_overflow_casted: {
     ref: 'elemental_overflow_casted',
     id: 'elemental-overflow-casted',
