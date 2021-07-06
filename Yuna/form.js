@@ -654,6 +654,20 @@ const elements = {
     type: 'checkbox',
     value: () => document.getElementById('caster-attacked-last-turn').checked
   },
+  sacred_target: {
+    ref: 'sacred_target',
+    id: 'sacred-target',
+    label: 'Sacred target',
+    type: 'checkbox',
+    value: () => document.getElementById('sacred-target').checked
+  },
+  vampire_target: {
+    ref: 'vampire_target',
+    id: 'vampire-target',
+    label: 'Target is a vampire',
+    type: 'checkbox',
+    value: () => document.getElementById('vampire-target').checked
+  },
   elemental_overflow_casted: {
     ref: 'elemental_overflow_casted',
     id: 'elemental-overflow-casted',

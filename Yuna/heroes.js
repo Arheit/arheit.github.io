@@ -85,12 +85,12 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 360,
+    baseAtkp: 456,
     baseAtkm: 50,
     maxHp: 567,
     defp: 132,
     defm: 130,
-    form: [elements.caster_stealth, elements.moon_blessing],
+    form: [elements.caster_stealth, elements.moon_blessing, elements.sacred_target],
     atkUp: () => {
       if (!elements.moon_blessing.value())
         return 0.9;
@@ -102,7 +102,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => elements.caster_stealth.value() ? 1.2 : 1,
+        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "physical"
       },
@@ -110,7 +110,7 @@ const heroes = {
         name: "Ambush",
         rate: () => elements.caster_stealth.value() ? 2.2 : 1.9,
         pow: 1,
-        mult: () => elements.caster_stealth.value() ? 1.2 : 1,
+        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "physical"
       }
@@ -120,11 +120,11 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 272,
+    baseAtkm: 336,
     maxHp: 840,
-    defp: 161,
+    defp: 175,
     defm: 190,
-    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted],
+    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.vampire_target],
     atkUp: (skill) => {
       if (!elements.pet.value())
         return 1;
@@ -136,7 +136,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -151,7 +151,7 @@ const heroes = {
             return 2.2;
         },
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -159,7 +159,7 @@ const heroes = {
         name: "Déluge élémentaire (monocible)",
         rate: 3,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -167,7 +167,7 @@ const heroes = {
         name: "Déluge élémentaire (AoE)",
         rate: 1.8,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
         aoe: true,
         dmgType: "magical"
       }
