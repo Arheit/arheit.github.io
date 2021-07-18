@@ -50,10 +50,10 @@ const heroes = {
     name: 'Ley',
     classType: classType.ranger,
     baseAtkp: 78,
-    baseAtkm: 344,
+    baseAtkm: 422,
     maxHp: 564,
-    defp: 121,
-    defm: 142,
+    defp: 191,
+    defm: 185,
     form: [elements.caster_speed],
     skills: {
       auto: {
@@ -85,12 +85,12 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 456,
+    baseAtkp: 532,
     baseAtkm: 50,
-    maxHp: 567,
-    defp: 132,
-    defm: 130,
-    form: [elements.caster_stealth, elements.moon_blessing, elements.sacred_target],
+    maxHp: 589,
+    defp: 187,
+    defm: 165,
+    form: [elements.caster_stealth, elements.moon_blessing, elements.vampire_target],
     atkUp: () => {
       if (!elements.moon_blessing.value())
         return 0.9;
@@ -102,7 +102,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       },
@@ -110,7 +110,7 @@ const heroes = {
         name: "Ambush",
         rate: () => elements.caster_stealth.value() ? 2.2 : 1.9,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       }
@@ -120,11 +120,11 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 336,
-    maxHp: 840,
-    defp: 175,
-    defm: 190,
-    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.vampire_target],
+    baseAtkm: 368,
+    maxHp: 900,
+    defp: 304,
+    defm: 338,
+    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target],
     atkUp: (skill) => {
       if (!elements.pet.value())
         return 1;
@@ -136,7 +136,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -151,7 +151,7 @@ const heroes = {
             return 2.2;
         },
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -159,7 +159,7 @@ const heroes = {
         name: "Déluge élémentaire (monocible)",
         rate: 3,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -167,7 +167,7 @@ const heroes = {
         name: "Déluge élémentaire (AoE)",
         rate: 1.8,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         aoe: true,
         dmgType: "magical"
       }
@@ -176,11 +176,11 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 241,
+    baseAtkp: 349,
     baseAtkm: 50,
-    maxHp: 1080,
-    defp: 221,
-    defm: 154,
+    maxHp: 1116,
+    defp: 342,
+    defm: 304,
     skills: {
       auto: {
         name: "Auto",
@@ -234,10 +234,10 @@ const heroes = {
     name: 'Eophred',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 256,
-    maxHp: 840,
-    defp: 144,
-    defm: 210,
+    baseAtkm: 312,
+    maxHp: 990,
+    defp: 180,
+    defm: 278,
     skills: {
       auto: {
         name: "Auto",
