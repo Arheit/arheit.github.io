@@ -54,13 +54,13 @@ const heroes = {
     maxHp: 649,
     defp: 191,
     defm: 185,
-    form: [elements.caster_speed],
+    form: [elements.caster_speed, elements.target_speed],
     skills: {
       auto: {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1,
+        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value()) ? 0.15 : 0,
         single: true,
         dmgType: "magical"
       },
@@ -68,7 +68,7 @@ const heroes = {
         name: "Ardent Strike",
         rate: 1.5,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1,
+        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value()) ? 0.15 : 0,
         single: true,
         dmgType: "magical"
       },
@@ -76,7 +76,7 @@ const heroes = {
         name: "Ardent Strike Explosion",
         rate: 0.75,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1,
+        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value()) ? 0.15 : 0,
         noMiss: true,
         dmgType: "magical"
       }
@@ -122,8 +122,8 @@ const heroes = {
     baseAtkp: 50,
     baseAtkm: 368,
     maxHp: 1008,
-    defp: 304,
-    defm: 338,
+    defp: 316,
+    defm: 352,
     form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target],
     atkUp: (skill) => {
       if (!elements.pet.value())
@@ -147,8 +147,10 @@ const heroes = {
 
           if (dice > 60)
             return 2.0;
-          else
+          else if (dice > 40)
             return 2.2;
+          else
+            return 2.6;
         },
         pow: 1,
         mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.16 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
@@ -176,7 +178,7 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 299,
+    baseAtkp: 521,
     baseAtkm: 50,
     maxHp: 1116,
     defp: 342,
@@ -198,13 +200,13 @@ const heroes = {
       },
       blood_rend_multi: {
         name: "Blood Rend (multicible)",
-        rate: 1.3,
+        rate: 1.5,
         pow: 1,
         dmgType: "physical"
       },
       blood_rend_mono: {
         name: "Blood Rend (monocible)",
-        rate: 1.6,
+        rate: 2.0,
         pow: 1,
         dmgType: "physical"
       }
