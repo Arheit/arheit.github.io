@@ -178,7 +178,7 @@ const heroes = {
             return 2.6;
         },
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -186,7 +186,7 @@ const heroes = {
         name: "Déluge élémentaire (monocible)",
         rate: 3.2,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -194,7 +194,7 @@ const heroes = {
         name: "Déluge élémentaire (AoE)",
         rate: 2,
         pow: 1,
-        mult: () => elements.sword_wish.value() ? 1.5 : 1 - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
         aoe: true,
         dmgType: "magical"
       }
@@ -254,7 +254,7 @@ const heroes = {
     defp: 80,
     defm: 100,
     form: [elements.caster_max_hp],
-    barrier: () => elements.caster_max_hp.value()*0.3,
+    barrier: () => elements.caster_max_hp.value() * 0.3,
     skills: {
       auto: {
         name: "Auto",
