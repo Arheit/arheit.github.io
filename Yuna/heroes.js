@@ -49,8 +49,8 @@ const heroes = {
   ley: {
     name: 'Ley',
     classType: classType.ranger,
-    baseAtkp: 78,
-    baseAtkm: 422,
+    baseAtkp: 65,
+    baseAtkm: 437,
     maxHp: 676,
     defp: 200,
     defm: 201,
@@ -68,16 +68,23 @@ const heroes = {
         name: "Ardent Strike",
         rate: 1.5,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
-        single: true,
+        mult: () => elements.caster_speed.value() / 2000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         dmgType: "magical"
       },
       ardent_strike_explosion: {
         name: "Ardent Strike Explosion",
         rate: 0.75,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 2000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         noMiss: true,
+        dmgType: "magical"
+      },
+      blazing_bane: {
+        name: "Blazing Bane",
+        rate: 320,
+        pow: 1,
+        mult: () => elements.caster_speed.value() / 500 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        single: true,
         dmgType: "magical"
       }
     }
