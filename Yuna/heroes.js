@@ -60,7 +60,7 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 4000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         single: true,
         dmgType: "magical"
       },
