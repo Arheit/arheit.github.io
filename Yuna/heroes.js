@@ -81,7 +81,7 @@ const heroes = {
       },
       blazing_bane: {
         name: "Blazing Bane",
-        rate: 320,
+        rate: 3.2,
         pow: 1,
         mult: () => elements.caster_speed.value() / 500 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         single: true,
