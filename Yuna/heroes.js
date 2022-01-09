@@ -159,7 +159,7 @@ const heroes = {
     form: [elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target, elements.ascension_stack],
     atkUp: (skill) => {
       let up = 1;
-      let asc_bonus = elements.ascension_stack().value() / 10;
+      let asc_bonus = elements.ascension_stack.value() / 10;
       up += asc_bonus;
       if (!elements.pet.value())
         return up;
