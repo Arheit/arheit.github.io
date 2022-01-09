@@ -627,6 +627,23 @@ const elements = {
     type: 'checkbox',
     value: () => document.getElementById('sword-wish').checked
   },
+  ascension_stack: {
+    ref: 'ascension_stack',
+    id: 'ascension-stack',
+    label: 'Dice value',
+    type: 'slider',
+    min: 0,
+    max: 3,
+    default: 0,
+    value: () => Number(document.getElementById('ascension-stack').value)
+  },
+  demon_mode_first_turn: {
+    ref: 'demon_mode_first_turn',
+    id: 'demon-mode-first-turn',
+    label: 'Demon mode first turn',
+    type: 'checkbox',
+    value: () => document.getElementById('demon-mode-first-turn').checked
+  },
   venom_stack: {
     ref: 'venom_stack',
     id: 'venom-stack',
