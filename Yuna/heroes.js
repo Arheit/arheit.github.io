@@ -156,7 +156,7 @@ const heroes = {
     maxHp: 1104,
     defp: 491,
     defm: 488,
-    form: [elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn],
+    form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack],
     atkUp: (skill) => {
       let up = 1;
       let asc_bonus = elements.ascension_stack.value() / 10;
@@ -211,6 +211,14 @@ const heroes = {
       elemental_burst: {
         name: "Détonation élémentaire",
         rate: 1.5,
+        pow: 1,
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      elemental_canon: {
+        name: "Canon élémentaire",
+        rate: () => 2.6 + elements.turn_stack.value() * 4.5,
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
