@@ -156,7 +156,7 @@ const heroes = {
     maxHp: 1104,
     defp: 491,
     defm: 488,
-    form: [elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target, elements.ascension_stack],
+    form: [elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn],
     atkUp: (skill) => {
       let up = 1;
       let asc_bonus = elements.ascension_stack.value() / 10;
