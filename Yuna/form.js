@@ -260,7 +260,7 @@ const elements = {
     min: 200,
     max: 5000,
     default: 750,
-    value: () => Number(document.getElementById('caster-defense').value)*(elements.caster_defense_up.value() ? 1.6 : 1)
+    value: () => Number(document.getElementById('caster-defense').value) * (elements.caster_defense_up.value() ? 1.6 : 1)
   },
   caster_defense_up: {
     ref: 'caster_defense_up',
@@ -275,10 +275,10 @@ const elements = {
     id: 'caster-speed',
     label: 'Caster\'s Speed',
     type: 'slider',
-    min: 70,
-    max: 350,
-    default: 281,
-    value: () => Number(document.getElementById('caster-speed').value)*(elements.caster_speed_up.value() ? 1.3 : 1),
+    min: 90,
+    max: 500,
+    default: 350,
+    value: () => Number(document.getElementById('caster-speed').value) * (elements.caster_speed_up.value() ? 1.3 : 1),
   },
   caster_speed_up: {
     ref: 'caster_speed_up',
@@ -627,6 +627,23 @@ const elements = {
     type: 'checkbox',
     value: () => document.getElementById('sword-wish').checked
   },
+  ascension_stack: {
+    ref: 'ascension_stack',
+    id: 'ascension-stack',
+    label: 'Dice value',
+    type: 'slider',
+    min: 0,
+    max: 3,
+    default: 0,
+    value: () => Number(document.getElementById('ascension-stack').value)
+  },
+  demon_mode_first_turn: {
+    ref: 'demon_mode_first_turn',
+    id: 'demon-mode-first-turn',
+    label: 'Demon mode first turn',
+    type: 'checkbox',
+    value: () => document.getElementById('demon-mode-first-turn').checked
+  },
   venom_stack: {
     ref: 'venom_stack',
     id: 'venom-stack',
@@ -723,7 +740,7 @@ const plus = (fieldId) => {
   const max = input.getAttribute('max');
   const inc = Math.round(Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1) * 10) / 10;
   if (max === null || Number(max) > input.value) {
-    input.value = Math.round((Number(input.value)+inc) * 10) / 10;
+    input.value = Math.round((Number(input.value) + inc) * 10) / 10;
     update(fieldId);
     resetPreset(fieldId);
   }
@@ -739,7 +756,7 @@ const minus = (fieldId) => {
   const min = input.getAttribute('min');
   const inc = Math.round(Number(document.getElementById(`${fieldId}-slide`).getAttribute('step') || 1) * 10) / 10;
   if (min === null || Number(min) < input.value) {
-    input.value = Math.round((Number(input.value)-inc) * 10) / 10;
+    input.value = Math.round((Number(input.value) - inc) * 10) / 10;
     update(fieldId);
     resetPreset(fieldId);
   }
@@ -868,7 +885,7 @@ const buildElement = (elem, parent) => {
     $(parent).append(`<div id="${elem.id}-block" class="stat-block">
                         <div class="form-group row col-sm-12">
                             <label for="crit" class="col-md-9 col-form-label form-control-sm">
-                                <h5>${elem.icon ? '<img src="'+elem.icon+'" width="20" height="20" /> ' : ''}${formLabel(elem.ref)}</h5>
+                                <h5>${elem.icon ? '<img src="' + elem.icon + '" width="20" height="20" /> ' : ''}${formLabel(elem.ref)}</h5>
                             </label>
                             <div class="input-group input-group-sm col-md-3">
                                 <div class="input-group-prepend">
@@ -889,7 +906,7 @@ const buildElement = (elem, parent) => {
                               <div class="custom-control custom-checkbox custom-control-inline buff-block">
                                   <input class="custom-control-input" type="checkbox" id="${elem.id}" value="1" onchange="resolve()" ${elem.default === true ? 'checked' : ''}>
                                   <label class="custom-control-label" for="${elem.id}">
-                                    ${elem.icon ? '<img src="'+elem.icon+'" width="20" height="20" />' : ''} ${formLabel(elem.ref)}
+                                    ${elem.icon ? '<img src="' + elem.icon + '" width="20" height="20" />' : ''} ${formLabel(elem.ref)}
                                   </label>
                               </div>
                         </div>`);
@@ -1074,11 +1091,11 @@ $(() => {
   });
 });
 
-(function() {
+(function () {
   let darkSwitch = document.getElementById('dark-switch');
   if (darkSwitch) {
     initTheme();
-    darkSwitch.addEventListener('change', function(event) {
+    darkSwitch.addEventListener('change', function (event) {
       applyTheme();
       // gtag('event', 'switch', {
       //   event_category: 'Theme',
@@ -1087,12 +1104,12 @@ $(() => {
     });
     function initTheme() {
       const darkThemeSelected =
-          localStorage.getItem('dark-switch') !== null &&
-          localStorage.getItem('dark-switch') === 'dark';
+        localStorage.getItem('dark-switch') !== null &&
+        localStorage.getItem('dark-switch') === 'dark';
       darkSwitch.checked = darkThemeSelected;
       darkThemeSelected
-          ? document.body.setAttribute('data-theme', 'dark')
-          : document.body.removeAttribute('data-theme');
+        ? document.body.setAttribute('data-theme', 'dark')
+        : document.body.removeAttribute('data-theme');
     }
     function applyTheme() {
       if (darkSwitch.checked) {
