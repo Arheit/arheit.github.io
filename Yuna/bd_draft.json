@@ -1,0 +1,407 @@
+{
+    "seithfeayr" : {
+        "level" : 8,
+        "player" : true,
+        "race" : "cinnegaleach",
+        "stats" : {
+            "hp" : 945,
+            "def" : 180,
+            "patk" : 673,
+            "matk" : 50,
+            "mdef" : 144,
+            "agi" : 299
+        }, 
+        "ammo" : {
+            "t1" : 6,
+            "t2" : 4,
+            "t3" : 2,
+            "t4" : 1
+        }, 
+        "attributes" : {
+            "strenght" : {
+                "str" : 40,
+                "athletics" : 40,
+                "save" : 40
+            },
+            "dexterity" : {
+                "dex" : 75,
+                "acrobatics" : 75,
+                "soh" : 75,
+                "stealth" : 75,
+                "save" : 75
+            },
+            "constitution" : {
+                "const" : 60,
+                "save" : 60
+            },
+            "intelligence" : {
+                "int" : 35,
+                "arcana" : 30,
+                "history" : 10,
+                "investigation" : 65,
+                "nature" : 65,
+                "religion" : 30,
+                "save" : 30
+            },
+            "wisdom" : {
+                "wis" : 75,
+                "anih" : 75,
+                "insight" : 75,
+                "medicine" : 75,
+                "perception" : 75,
+                "survival" : 75,
+                "save" : 75
+            },
+            "charisma" : {
+                "cha" : 75,
+                "deception" : 75,
+                "intimidation" : 75,
+                "performance" : 75,
+                "persuation" : 75,
+                "save" : 75
+            }
+        },
+        "skills" : {
+            "passives" : {
+                "moon_blessing" : {
+                    "name" : "Moon's blessing",
+                    "type" : "weather",
+                    "mult" : {
+                        "day" : {
+                            "mult" : {
+                                "patk" : 0.9
+                            }
+                        },
+                        "night" : {
+                            "mult" : {
+                                "patk" : 1.2
+                            }
+                        }
+                    },
+                    "description" : "Increases attack by 20% at night and decreasing ATK by 10% during the day, can see in the dark"
+                },
+                "nixied_blessing" : {
+                    "name" : "Nixied's Blessing",
+                    "type" : "elemental_resistance",
+                    "mult": {
+                        "ice" : {
+                            "mult" : {
+                                "pdef" : 1.2,
+                                "mdef" : 1.2 
+                            }
+                        },
+                        "fire" : {
+                            "mult" : {
+                                "pdef" : 0.8,
+                                "mdef" : 0.8
+                            }
+                        }
+                    },
+                    "description" : "Resistance to ice and cold increases while decreasing resistance to fire and heat"
+                },
+                "sunsword" : {
+                    "name" : "Sunsword",
+                    "type" : "race_dmg",
+                    "mult" : {
+                        "vampire" : {
+                            "dmg" : 1.5
+                        }
+                    },
+                    "description" : "+50% DMG to Vampires"
+                },
+                "mage_hunter" : {
+                    "name" : "Mage Hunter",
+                    "type" : "attack_on_magic",
+                    "cooldown" : 2,
+                    "add_buff" : {
+                        "attack" : 1
+                    },
+                    "mult" : {
+                        "patk" : 2.0
+                    },
+                    "description" : "When an enemy uses a magic based attack, grants the caster an attack buff for one turn attacks a random enemy for 200% of ATK. Effect can only be activated once every two turns "
+                },
+                "nixied_thief" : {
+                    "name" : "Nixied Thief",
+                    "type" : "on_roll_50",
+                    "add_buff" : {
+                        "stealth" : 1
+                    }
+                },
+                "stealth_atk" : {
+                    "name" : "stealth_atk",
+                    "type" : "stat_on_buff",
+                    "mult" : {
+                        "stealth" : {
+                            "mult" : {
+                                "patk" : 1.2
+                            }
+                        }
+                    }
+                },
+                "vampire_slayer" : {
+                    "name" : "Vampire Slayer",
+                    "type" : "race_dmg",
+                    "mult" : {
+                        "vampire" : {
+                            "mult" : {
+                                "dmg" : 1.1
+                            }
+                        }
+                    }
+                }
+            },
+            "actives" : {
+                "t1" : {
+                    "nixieds_domain" : {
+                        "name" : "Nixied's Domain", 
+                        "type" : "movement",
+                        "add_buff" : {
+                            "stealh" : 2
+                        },
+                        "description" : "Renders the caster invisible for two turns, during this time the caster becomes untargetable by single attacks. While invisible the caster can move and attack without breaking stealth and damage dealt is increased by 20%."
+                    },
+                    "nixieds_domain_soulburn" : {
+                        "name" : "Nixied's Domain SB", 
+                        "type" : "movement",
+                        "add_buff" : {
+                            "stealh" : 2,
+                            "skill_nullifier" : 1
+                        },
+                        "description" : "Renders the caster invisible for two turns, during this time the caster becomes untargetable by single attacks. While invisible the caster can move and attack without breaking stealth and damage dealt is increased by 20%. [Soulburn 20 souls] : Grants the caster a skill nullifier that negates damage once"
+                    }
+                },
+                "t2": {
+                    "frost_acid" : {
+                        "name" : "Frost Acid", 
+                        "type" : "movement",
+                        "debuff_roll" : true,
+                        "inflict_debuff" : {
+                            "frostbite" : 2,
+                            "marked" : 2
+                        },
+                        "description" : "Covers weapon in a deadly venom causing the next attack to inflict [Frostbite] status as well inflicting [Marked] on the target for 2 turns."
+                    },
+                    "ambush" : {
+                        "name" : "Ambush",
+                        "type" : "attack_on_buff",
+                        "mult" : {
+                            "stealth" : {
+                                "mult" : {
+                                    "patk" : 2.2
+                                }
+                            },
+                            "default" : {
+                                "mult" : {
+                                    "patk" : 1.9
+                                }
+                            }
+                        },
+                        "description" : "Ambushes the enemy, dealing 190% of ATK damage, if the caster is stealthed deals 220% ATK damage instead"
+                    }
+                },
+                "t3" : {
+                    "phantom_claw" : {
+                        "name" : "Phantom Claw", 
+                        "type" : "attack_per_debuff",
+                        "mult" : {
+                            "patk" : 2.5
+                        },
+                        "bonus" : {
+                            "mult" : {
+                                "dmg" : 1.25
+                            }
+                        },
+                        "description" : "Concentrates the blessing of Nixied into a deadly scythe before striking the exposed weak points of an enemy dealing damage equal to 250% of the casters attack and dealing an aditionnal 25% damage for every debuff inficted on the enemy"
+                    }
+                },
+                "t4" : {
+                    "nocturne" : {
+                        "name" : "Nocturne",
+                        "type" : "attack",
+                        "mult" : {
+                            "patk" : 1.5
+                        },
+                        "add_buff" : {
+                            "stealth" : 2,
+                            "skill_nullifier" : 1
+                        },
+                        "debuff_roll" : true,
+                        "inflict_debuff" : {
+                            "batk" : 2
+                        },
+                        "description" : "Empowers the next attack with the power of moonlight before delivering a crippling blow equal to 150% of attack on the enemy inflicting attack break for one turn and granting the caster [Stealth] and a [Skill Nullifier] preventing an attack once that does not exceed 50% of the casters max HP"
+                    }
+                }
+            }
+        },
+        "titles" : {
+            "Taboo" : 7,
+            "Misericorde" : 2,
+            "Heresy" : 5,
+            "Exploration" : true,
+            "Vampire Slayer" : true,
+            "Foul Feeder" : true,
+            "Perfidy" : true, 
+            "Labyrinth explorer" : true 
+
+        },
+        "inventory" : {
+            "medium_potion" : {
+                "name" : "Medium potion",
+                "amount" : 3,
+                "effect" : {
+                    "type" : "heal",
+                    "mult" : {
+                        "heal" : 0.4
+                    }
+                }
+            },
+            "torch" : {
+                "name" : "Torch",
+                "amount" : 2
+            },
+            "antidote" : {
+                "name" : "Antidote",
+                "amount" : 9,
+                "effect" : {
+                    "type" : "cleanse",
+                    "debuff_list" : ["poison"]
+                }
+            },
+            "poison_flask" : {
+                "name" : "Poison Flask",
+                "amount" : 1,
+                "effect" : {
+                    "inflict_debuff" : {
+                        "poison" : 2
+                    }
+                }
+            },
+            "gold" : {
+                "name" : "Gold",
+                "amount" : 25975
+            }
+
+        }   
+    },
+    "ley" : {
+        "level" : 8,
+        "player" : true,
+        "race" : "elf",
+        "stats" : {
+            "hp" : 786,
+            "def" : 200,
+            "patk" : 65,
+            "matk" : 437,
+            "mdef" : 201,
+            "agi" : 455
+        }, 
+        "ammo" : {
+            "t1" : 5,
+            "t2" : 3,
+            "t3" : 1,
+            "t4" : 2
+        }, 
+        "attributes" : {
+            "strenght" : {
+                "str" : null,
+                "athletics" : null,
+                "save" : null
+            },
+            "dexterity" : {
+                "dex" : null,
+                "acrobatics" : null,
+                "soh" : null,
+                "stealth" : null,
+                "save" : null
+            },
+            "constitution" : {
+                "const" : null,
+                "save" : null
+            },
+            "intelligence" : {
+                "int" : null,
+                "arcana" : null,
+                "history" : null,
+                "investigation" : null,
+                "nature" : null,
+                "religion" : null,
+                "save" : null
+            },
+            "wisdom" : {
+                "wis" : null,
+                "anih" : null,
+                "insight" : null,
+                "medicine" : null,
+                "perception" : null,
+                "survival" : null,
+                "save" : null
+            },
+            "charisma" : {
+                "cha" : null,
+                "deception" : null,
+                "intimidation" : null,
+                "performance" : null,
+                "persuation" : null,
+                "save" : null
+            }
+        }
+    },
+    "wyvern" : {
+        "level" : 5,
+        "player" : false,
+        "stats" : {
+            "hp" : 6000,
+            "def" : 1000,
+            "patk" : 600,
+            "matk" : 600,
+            "mdef" : 1000,
+            "agi" : 200
+        }, 
+        "attributes" : {
+            "strenght" : {
+                "str" : null,
+                "athletics" : null,
+                "save" : null
+            },
+            "dexterity" : {
+                "dex" : null,
+                "acrobatics" : null,
+                "soh" : null,
+                "stealth" : null,
+                "save" : null
+            },
+            "constitution" : {
+                "const" : null,
+                "save" : null
+            },
+            "intelligence" : {
+                "int" : null,
+                "arcana" : null,
+                "history" : null,
+                "investigation" : null,
+                "nature" : null,
+                "religion" : null,
+                "save" : null
+            },
+            "wisdom" : {
+                "wis" : null,
+                "anih" : null,
+                "insight" : null,
+                "medicine" : null,
+                "perception" : null,
+                "survival" : null,
+                "save" : null
+            },
+            "charisma" : {
+                "cha" : null,
+                "deception" : null,
+                "intimidation" : null,
+                "performance" : null,
+                "persuation" : null,
+                "save" : null
+            }
+        }
+    }
+}
