@@ -276,8 +276,8 @@ const elements = {
     label: 'Caster\'s Speed',
     type: 'slider',
     min: 90,
-    max: 500,
-    default: 350,
+    max: 800,
+    default: 392,
     value: () => Number(document.getElementById('caster-speed').value) * (elements.caster_speed_up.value() ? 1.3 : 1),
   },
   caster_speed_up: {
