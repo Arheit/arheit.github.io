@@ -51,9 +51,9 @@ const heroes = {
     classType: classType.ranger,
     baseAtkp: 65,
     baseAtkm: 437,
-    maxHp: 676,
+    maxHp: 786,
     defp: 333,
-    defm: 330,
+    defm: 300,
     form: [elements.caster_speed, elements.target_speed],
     skills: {
       auto: {
@@ -93,7 +93,7 @@ const heroes = {
     name: 'Sèithfeayr',
     classType: classType.thief,
     baseAtkp: 712,
-    baseAtkm: 50,
+    baseAtkm: 75,
     maxHp: 945,
     defp: 180,
     defm: 144,
@@ -121,12 +121,12 @@ const heroes = {
         single: true,
         dmgType: "physical"
       },
-      hidden_strike: {
-        name: "Hidden Strike",
-        rate: 1.5,
+      phantom_claw: {
+        name: "Phantom Claw",
+        rate: 2.5,
         pow: 1,
         mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0)
-          + 0.15 * elements.target_nb_debuff.value(),
+          + 0.25 * elements.target_nb_debuff.value(),
         single: true,
         dmgType: "physical"
       },
@@ -151,24 +151,27 @@ const heroes = {
   adonai: {
     name: 'Adonaï',
     classType: classType.mage,
-    baseAtkp: 50,
-    baseAtkm: 420,
-    maxHp: 1042,
-    defp: 334,
-    defm: 371,
-    form: [elements.sword_wish, elements.pet, elements.dice_roll, elements.elemental_overflow_casted, elements.sacred_target],
+    baseAtkp: 63,
+    baseAtkm: 600,
+    maxHp: 1104,
+    defp: 491,
+    defm: 488,
+    form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack],
     atkUp: (skill) => {
+      let up = 1;
+      let asc_bonus = elements.ascension_stack.value() / 10;
+      up += asc_bonus;
       if (!elements.pet.value())
-        return 1;
+        return up;
       else
-        return (skill.dmgType && skill.dmgType === "magical") ? 1.3 : 1;
+        return (skill.dmgType && skill.dmgType === "magical") ? up + 0.3 : up;
     },
     skills: {
       auto: {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
@@ -185,24 +188,49 @@ const heroes = {
             return 2.6;
         },
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
       elemental_overflow_mono: {
         name: "Déluge élémentaire (monocible)",
-        rate: 3.2,
+        rate: 2.8,
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
       },
       elemental_overflow_mult: {
         name: "Déluge élémentaire (AoE)",
-        rate: 2,
+        rate: 1.8,
         pow: 1,
-        mult: () => (elements.sword_wish.value() ? 1.5 : 1) - (elements.elemental_overflow_casted.value() ? 0.10 : 0) + (elements.sacred_target.value() ? 0.3 : 0),
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         aoe: true,
+        dmgType: "magical"
+      },
+      elemental_burst: {
+        name: "Détonation élémentaire",
+        rate: 1.5,
+        pow: 1,
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      elemental_canon: {
+        name: "Canon élémentaire",
+        rate: () => 2.6 + elements.turn_stack.value() * 4.5,
+        pow: 1,
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      cursed_thorn: {
+        name: "Cursed Thorn",
+        rate: 2.0,
+        pow: 1,
+        penetrate: () => (elements.demon_mode_first_turn.value() ? 0.2 : 0) + 0.35,
+        mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
+        single: true,
         dmgType: "magical"
       }
     }
@@ -223,29 +251,36 @@ const heroes = {
         single: true,
         dmgType: "physical"
       },
-      vampire_blade: {
-        name: "Vampire Blade",
-        rate: 1.8,
-        pow: 1,
-        single: true,
-        dmgType: "physical"
-      },
       blood_rend_multi: {
         name: "Blood Rend (multicible)",
-        rate: 1.5,
+        rate: 1.3,
         pow: 1,
         dmgType: "physical"
       },
       blood_rend_mono: {
         name: "Blood Rend (monocible)",
-        rate: 2.0,
+        rate: 1.6,
         pow: 1,
         dmgType: "physical",
         single: true
       },
+      bleeding_cut: {
+        name: "Bleeding Cut",
+        rate: 1.2,
+        pow: 1,
+        dmgType: "physical",
+        single: true
+      },
+      vampire_blade: {
+        name: "Vampire Blade",
+        rate: 2.2,
+        pow: 1,
+        single: true,
+        dmgType: "physical"
+      },
       sequential_cutter: {
         name: "Sequential Cutter",
-        rate: 3.6,
+        rate: 3.0,
         pow: 1,
         dmgType: "physical",
         aoe: true
@@ -291,6 +326,13 @@ const heroes = {
       inflict_wounds: {
         name: "Inflict Wounds",
         rate: 1.6,
+        pow: 1,
+        single: true,
+        dmgType: "magical"
+      },
+      luminos: {
+        name: "Luminos",
+        rate: 1,
         pow: 1,
         single: true,
         dmgType: "magical"
