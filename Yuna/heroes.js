@@ -50,10 +50,10 @@ const heroes = {
     name: 'Ley',
     classType: classType.ranger,
     baseAtkp: 65,
-    baseAtkm: 437,
-    maxHp: 786,
-    defp: 333,
-    defm: 300,
+    baseAtkm: 461,
+    maxHp: 812,
+    defp: 344,
+    defm: 342,
     form: [elements.caster_speed, elements.target_speed],
     skills: {
       auto: {
@@ -92,8 +92,8 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 712,
-    baseAtkm: 75,
+    baseAtkp: 894,
+    baseAtkm: 50,
     maxHp: 945,
     defp: 180,
     defm: 144,
@@ -152,10 +152,10 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 63,
-    baseAtkm: 600,
-    maxHp: 1104,
-    defp: 491,
-    defm: 488,
+    baseAtkm: 650,
+    maxHp: 1208,
+    defp: 506,
+    defm: 502,
     form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack],
     atkUp: (skill) => {
       let up = 1;
@@ -238,7 +238,7 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 490,
+    baseAtkp: 613,
     baseAtkm: 50,
     maxHp: 1326,
     defp: 418,
@@ -312,9 +312,9 @@ const heroes = {
     classType: classType.mage,
     baseAtkp: 50,
     baseAtkm: 280,
-    maxHp: 1404,
-    defp: 340,
-    defm: 400,
+    maxHp: 1443,
+    defp: 400,
+    defm: 423,
     skills: {
       auto: {
         name: "Auto",
