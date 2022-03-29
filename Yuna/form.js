@@ -277,7 +277,7 @@ const elements = {
     type: 'slider',
     min: 90,
     max: 800,
-    default: 421,
+    default: 399,
     value: () => Number(document.getElementById('caster-speed').value) * (elements.caster_speed_up.value() ? 1.3 : 1),
   },
   caster_speed_up: {
@@ -619,6 +619,13 @@ const elements = {
     type: 'checkbox',
     value: () => document.getElementById('pet').checked,
     icon: 'https://epic7x.com/wp-content/uploads/2018/12/stic_att_up.png'
+  },
+  flying_enemy: {
+    ref: 'flying_enemy',
+    id: 'flying-enemy',
+    label: 'Enemi volant/flottant',
+    type: 'checkbox',
+    value: () => document.getElementById('flying-enemy').checked
   },
   sword_wish: {
     ref: 'sword_wish',

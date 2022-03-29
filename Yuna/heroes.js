@@ -50,40 +50,57 @@ const heroes = {
     name: 'Ley',
     classType: classType.ranger,
     baseAtkp: 65,
-    baseAtkm: 461,
-    maxHp: 812,
-    defp: 344,
-    defm: 342,
+    baseAtkm: 509,
+    maxHp: 1040,
+    defp: 369,
+    defm: 370,
     form: [elements.caster_speed, elements.target_speed],
     skills: {
       auto: {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 4000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         single: true,
         dmgType: "magical"
       },
       ardent_strike: {
         name: "Ardent Strike",
-        rate: 1.5,
+        rate: 1.2,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 2000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 5000 + elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         dmgType: "magical"
       },
       ardent_strike_explosion: {
         name: "Ardent Strike Explosion",
-        rate: 0.75,
+        rate: 0.6,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 2000 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 5000 + elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
         noMiss: true,
         dmgType: "magical"
       },
       blazing_bane: {
         name: "Blazing Bane",
-        rate: 3.2,
+        rate: 1.8,
         pow: 1,
-        mult: () => elements.caster_speed.value() / 500 + elements.caster_speed.value() / 1000 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        mult: () => elements.caster_speed.value() / 1250 + elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      agility_strike: {
+        name: "Agility Strike",
+        rate: 1.7,
+        pow: 1,
+        mult: () => elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        single: true,
+        dmgType: "magical"
+      },
+      hot_streak: {
+        name: "Hot Streak",
+        rate: 2.0,
+        pow: 1,
+        mult: () => elements.caster_speed.value() / 1250 + elements.caster_speed.value() / 2500 + 1 + (elements.caster_speed.value() > elements.target_speed.value() ? 0.15 : 0),
+        penetrate: () => 0.15,
         single: true,
         dmgType: "magical"
       }
@@ -92,12 +109,12 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 894,
+    baseAtkp: 613,
     baseAtkm: 50,
-    maxHp: 945,
-    defp: 180,
-    defm: 144,
-    form: [elements.caster_stealth, elements.moon_blessing, elements.vampire_target, elements.target_nb_debuff],
+    maxHp: 1449,
+    defp: 281,
+    defm: 231,
+    form: [elements.caster_stealth, elements.moon_blessing, elements.vampire_target, elements.target_nb_debuff, elements.caster_nb_buff],
     atkUp: () => {
       if (!elements.moon_blessing.value())
         return 0.9;
@@ -109,32 +126,65 @@ const heroes = {
         name: "Auto",
         rate: 1,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       },
       ambush: {
         name: "Ambush",
-        rate: () => elements.caster_stealth.value() ? 2.2 : 1.9,
+        rate: 1.4,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       },
-      phantom_claw: {
-        name: "Phantom Claw",
-        rate: 2.5,
+      assassinate: {
+        name: "Assassinate",
+        rate: 1.25,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0)
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
+        single: true,
+        dmgType: "physical"
+      },
+      ravenous_scythe: {
+        name: "Ravenous Scythe",
+        rate: 1.6,
+        pow: 1,
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0)
+          + 0.15 * elements.caster_nb_buff.value(),
+        single: true,
+        dmgType: "physical"
+      },
+      phantom_scythe: {
+        name: "Phantom Scythe",
+        rate: 1.6,
+        pow: 1,
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0)
           + 0.25 * elements.target_nb_debuff.value(),
         single: true,
         dmgType: "physical"
       },
-      nocturne: {
-        name: "Nocturne",
-        rate: 1.5,
+      moonlight: {
+        name: "Moonlight",
+        rate: () => (elements.moon_blessing.value() ? 1.8 : 1.65),
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
+        single: true,
+        dmgType: "physical"
+      },
+      starlight: {
+        name: "Starlight",
+        rate: () => 1.55,
+        pow: 1,
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
+        single: true,
+        dmgType: "physical"
+      },
+      piercing_icicle: {
+        name: "Piercing Icicle",
+        rate: 1.7,
+        pow: 1,
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       },
@@ -142,7 +192,7 @@ const heroes = {
         name: "Mage Hunter",
         rate: 2.0,
         pow: 1,
-        mult: () => (elements.caster_stealth.value() ? 1.2 : 1) + (elements.vampire_target.value() ? 0.5 : 0),
+        mult: () => 1 + (elements.vampire_target.value() ? 0.5 : 0),
         single: true,
         dmgType: "physical"
       }
@@ -152,11 +202,11 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 63,
-    baseAtkm: 650,
-    maxHp: 1208,
-    defp: 506,
-    defm: 502,
-    form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack],
+    baseAtkm: 806,
+    maxHp: 1401,
+    defp: 552,
+    defm: 543,
+    form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack, elements.flying_enemy],
     atkUp: (skill) => {
       let up = 1;
       let asc_bonus = elements.ascension_stack.value() / 10;
@@ -177,16 +227,7 @@ const heroes = {
       },
       embrasement: {
         name: "Embrasement d'épée",
-        rate: () => {
-          let dice = elements.dice_roll.value();
-
-          if (dice > 60)
-            return 2.0;
-          else if (dice > 40)
-            return 2.2;
-          else
-            return 2.6;
-        },
+        rate: () => (elements.flying_enemy.value() ? 1.6 : 1.25),
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
@@ -194,7 +235,7 @@ const heroes = {
       },
       elemental_overflow_mono: {
         name: "Déluge élémentaire (monocible)",
-        rate: 2.8,
+        rate: 1.6,
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
@@ -202,7 +243,7 @@ const heroes = {
       },
       elemental_overflow_mult: {
         name: "Déluge élémentaire (AoE)",
-        rate: 1.8,
+        rate: 1.25,
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         aoe: true,
@@ -210,7 +251,7 @@ const heroes = {
       },
       elemental_burst: {
         name: "Détonation élémentaire",
-        rate: 1.5,
+        rate: 0.8,
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
@@ -218,7 +259,7 @@ const heroes = {
       },
       elemental_canon: {
         name: "Canon élémentaire",
-        rate: () => 2.6 + elements.turn_stack.value() * 4.5,
+        rate: () => 1.4 + elements.turn_stack.value() * 1.2,
         pow: 1,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
@@ -226,9 +267,9 @@ const heroes = {
       },
       cursed_thorn: {
         name: "Cursed Thorn",
-        rate: 2.0,
+        rate: 1.75,
         pow: 1,
-        penetrate: () => (elements.demon_mode_first_turn.value() ? 0.2 : 0) + 0.35,
+        penetrate: () => (elements.demon_mode_first_turn.value() ? 0.2 : 0) + 0.4,
         mult: () => 1 + (elements.sacred_target.value() ? 0.3 : 0),
         single: true,
         dmgType: "magical"
@@ -238,11 +279,11 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 613,
+    baseAtkp: 662,
     baseAtkm: 50,
     maxHp: 1326,
-    defp: 418,
-    defm: 306,
+    defp: 605,
+    defm: 495,
     skills: {
       auto: {
         name: "Auto",
@@ -253,37 +294,44 @@ const heroes = {
       },
       blood_rend_multi: {
         name: "Blood Rend (multicible)",
-        rate: 1.3,
+        rate: 1.2,
         pow: 1,
         dmgType: "physical"
       },
       blood_rend_mono: {
         name: "Blood Rend (monocible)",
-        rate: 1.6,
+        rate: 1.4,
         pow: 1,
         dmgType: "physical",
         single: true
       },
       bleeding_cut: {
         name: "Bleeding Cut",
-        rate: 1.2,
+        rate: 1.1,
         pow: 1,
         dmgType: "physical",
         single: true
       },
       vampire_blade: {
         name: "Vampire Blade",
-        rate: 2.2,
+        rate: 1.25,
         pow: 1,
         single: true,
         dmgType: "physical"
       },
       sequential_cutter: {
         name: "Sequential Cutter",
-        rate: 3.0,
+        rate: 2.0,
         pow: 1,
         dmgType: "physical",
         aoe: true
+      },
+      obliteration_sequence: {
+        name: "Obliteration Sequence",
+        rate: 4.0,
+        pow: 1,
+        dmgType: "physical",
+        single: true
       }
     }
   },
@@ -311,10 +359,11 @@ const heroes = {
     name: 'Eophred',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 280,
-    maxHp: 1443,
-    defp: 400,
-    defm: 423,
+    baseAtkm: 88,
+    maxHp: 2028,
+    defp: 518,
+    defm: 570,
+    form: [elements.target_has_buff],
     skills: {
       auto: {
         name: "Auto",
@@ -325,7 +374,7 @@ const heroes = {
       },
       inflict_wounds: {
         name: "Inflict Wounds",
-        rate: 1.6,
+        rate: 1.2,
         pow: 1,
         single: true,
         dmgType: "magical"
@@ -334,6 +383,14 @@ const heroes = {
         name: "Luminos",
         rate: 1,
         pow: 1,
+        single: true,
+        dmgType: "magical"
+      },
+      slayer_strike: {
+        name: "Slayer's Strike",
+        rate: 1.4,
+        pow: 1,
+        penetrate: () => (elements.target_has_debuff.value() ? 0.5 : 0),
         single: true,
         dmgType: "magical"
       }
