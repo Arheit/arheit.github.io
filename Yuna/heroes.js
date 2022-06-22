@@ -201,11 +201,11 @@ const heroes = {
   adonai: {
     name: 'Adonaï',
     classType: classType.mage,
-    baseAtkp: 63,
-    baseAtkm: 806,
+    baseAtkp: 50,
+    baseAtkm: 1018,
     maxHp: 1401,
-    defp: 552,
-    defm: 543,
+    defp: 819,
+    defm: 789,
     form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack, elements.flying_enemy],
     atkUp: (skill) => {
       let up = 1;
