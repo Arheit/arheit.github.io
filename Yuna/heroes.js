@@ -51,7 +51,7 @@ const heroes = {
     classType: classType.ranger,
     baseAtkp: 65,
     baseAtkm: 509,
-    maxHp: 1040,
+    maxHp: 1194,
     defp: 369,
     defm: 370,
     form: [elements.caster_speed, elements.target_speed],
@@ -109,11 +109,11 @@ const heroes = {
   seithfeayr: {
     name: 'Sèithfeayr',
     classType: classType.thief,
-    baseAtkp: 613,
+    baseAtkp: 755,
     baseAtkm: 50,
-    maxHp: 1449,
-    defp: 281,
-    defm: 231,
+    maxHp: 1725,
+    defp: 387,
+    defm: 266,
     form: [elements.caster_stealth, elements.moon_blessing, elements.vampire_target, elements.target_nb_debuff, elements.caster_nb_buff],
     atkUp: () => {
       if (!elements.moon_blessing.value())
@@ -202,10 +202,10 @@ const heroes = {
     name: 'Adonaï',
     classType: classType.mage,
     baseAtkp: 50,
-    baseAtkm: 1018,
-    maxHp: 1401,
-    defp: 819,
-    defm: 789,
+    baseAtkm: 1039,
+    maxHp: 1553,
+    defp: 827,
+    defm: 796,
     form: [elements.pet, elements.dice_roll, elements.sacred_target, elements.ascension_stack, elements.demon_mode_first_turn, elements.turn_stack, elements.flying_enemy],
     atkUp: (skill) => {
       let up = 1;
@@ -279,11 +279,11 @@ const heroes = {
   zidkala: {
     name: 'Zid\'Kala',
     classType: classType.warrior,
-    baseAtkp: 662,
+    baseAtkp: 686,
     baseAtkm: 50,
     maxHp: 1326,
-    defp: 605,
-    defm: 495,
+    defp: 660,
+    defm: 540,
     skills: {
       auto: {
         name: "Auto",
@@ -360,7 +360,7 @@ const heroes = {
     classType: classType.mage,
     baseAtkp: 50,
     baseAtkm: 88,
-    maxHp: 2028,
+    maxHp: 2223,
     defp: 518,
     defm: 570,
     form: [elements.target_has_buff],
