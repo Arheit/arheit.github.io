@@ -130,7 +130,7 @@ const heroes = {
   },
   kaguya_kanzashi: {
     name: 'Kaguya Kanzashi',
-    classType: classType.knight,
+    classType: classType.mage,
     baseAtkp: 100,
     baseAtkm: 130,
     maxHp: 450,
