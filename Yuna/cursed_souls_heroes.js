@@ -142,7 +142,7 @@ const heroes = {
         rate: 1,
         pow: 1,
         single: true,
-        dmgType: "physical"
+        dmgType: "magical"
       }
     }
   },
